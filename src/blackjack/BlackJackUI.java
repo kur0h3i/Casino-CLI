@@ -110,13 +110,12 @@ public class BlackJackUI extends JFrame {
     }
 
     private JLabel crearEtiquetaCarta(Carta carta) {
-        String ruta = "asstes/cartas/" + carta.getNombreArchivo();
+        String ruta = "assets/cartas/" + carta.getNombreArchivo();
         System.out.println(ruta); // Ruta de la imagen
         ImageIcon icono = new ImageIcon(ruta);
-        if (icono.getIconWidth() == -1) {
-            System.out.println("No se pudo cargar la imagen: " + ruta);
-        }
         JLabel label = new JLabel(icono);
+        Image img = icono.getImage().getScaledInstance(100, 150, Image.SCALE_SMOOTH);
+        label.setIcon(new ImageIcon(img));
         return label;
     }
 
