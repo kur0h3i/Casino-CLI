@@ -88,11 +88,35 @@ public class BlackJackUI extends JFrame {
         jugadorPanel.removeAll();
         crupierPanel.removeAll();
 
+        // Mostrar nombre del jugador
+        
+        JLabel jugadorLabel = new JLabel();
+        ImageIcon iconoJugador = new ImageIcon("assets/icon/jugador.png");
+        Image imagenIconoJugador = iconoJugador.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        jugadorLabel.setIcon(new ImageIcon(imagenIconoJugador));
+        jugadorLabel.setText("Jugador");
+        jugadorLabel.setHorizontalTextPosition(JLabel.CENTER);
+        jugadorLabel.setVerticalTextPosition(JLabel.BOTTOM);
+        jugadorLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        jugadorPanel.add(jugadorLabel);
+        
+
         // Mostrar cartas del jugador
         for (int i = 0; i < jugador.getMano().length && jugador.getMano()[i] != null; i++) {
             Carta carta = jugador.getMano()[i];
             jugadorPanel.add(crearEtiquetaCarta(carta));
         }
+
+        //Mostrar Dealer
+        JLabel crupierLabel = new JLabel();
+        ImageIcon iconoCrupier = new ImageIcon("assets/icon/crupier.png");
+        Image imagenIconoCrupier = iconoCrupier.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        crupierLabel.setIcon(new ImageIcon(imagenIconoCrupier));
+        crupierLabel.setText("Crupier");
+        crupierLabel.setHorizontalTextPosition(JLabel.CENTER);
+        crupierLabel.setVerticalTextPosition(JLabel.BOTTOM);
+        crupierLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        crupierPanel.add(crupierLabel);
 
         // Mostrar cartas del crupier
         for (int i = 0; i < crupier.getMano().length && crupier.getMano()[i] != null; i++) {
