@@ -1,4 +1,4 @@
-package blackjack;
+package recursos;
 // Carta.java
 public class Carta {
 

@@ -1,4 +1,4 @@
-package blackjack;
+package recursos;
 import java.util.Random;
 
 public class Baraja {
