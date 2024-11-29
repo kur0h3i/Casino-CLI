@@ -1,4 +1,4 @@
-package jugadores;
+package personas;
 
 public class Crupier {
     

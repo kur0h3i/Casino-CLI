@@ -1,15 +1,15 @@
-package jugadores;
+package personas;
 
 public class Jugador {
     
     // Atributos
     String nombre;
     int edad;
-    float dinero;
+    double dinero;
     int fichas;
 
     // Constructor
-    public Jugador(String nombre, int edad, float dinero){
+    public Jugador(String nombre, int edad, double dinero){
         this.nombre = nombre;
         this.edad = edad;
         this.dinero = dinero;
@@ -25,7 +25,7 @@ public class Jugador {
     public void setEdad( int edad){
         this.edad = edad;
     }
-    public void setDinero( float dinero){
+    public void setDinero( double dinero){
         this.dinero = dinero;
     }
     public void setFichas( int fichas){
@@ -39,7 +39,7 @@ public class Jugador {
     public int getEdad(){
         return this.edad;
     }
-    public float getDinero(){
+    public double getDinero(){
         return this.dinero;
     }
     public int getFichas(){

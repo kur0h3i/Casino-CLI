@@ -1,23 +1,26 @@
 package casino;
 
 import java.util.Scanner;
-import jugadores.*;
+
+import personas.*;
 
 public class SalaRegistro {
     
     // Atributos
     Jugador jugador;
 
-    public SalaRegistro(){
-        //ASCII ART
+    // Constructor
+    public SalaRegistro() {
+        // ASCII ART
         asciiArt();
-        // Informacion Casino
+        // Información sobre el Casino
         informacionCasino();
-        // Datos Jugador
+        // Datos del Jugador
         jugador = crearJugador();
     }
 
-    public void asciiArt(){
+    // ASCII ART
+    public void asciiArt() {
         System.out.println(
             "   ______           _                  ____                    __   \n" +
             "  / ____/___ ______(_)___  ____       / __ \\____  __  ______ _/ /__ \n" +
@@ -25,51 +28,91 @@ public class SalaRegistro {
             "/ /___/ /_/ (__  ) / / / / /_/ /    / _, _/ /_/ / /_/ / /_/ / /  __/\n" +
             "\\____/\\__,_/____/_/_/ /_/\\____/    /_/ |_|\\____/\\__, /\\__,_/_/\\___/ \n" +
             "                                               /____/               \n"
-            );
+        );
     }
 
-    public void informacionCasino(){
+    // Información sobre el Casino
+    public void informacionCasino() {
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Bienvenidos a Casino Royale, un emocionante juego de casino donde tu objetivo es convertir una pequeña cantidad de 200€ en 1000€ a través de una serie de apuestas en varios juegos clásicos de casino. Este desafiante reto pondrá a prueba tu habilidad para gestionar el dinero.");
+        System.out.println("Bienvenidos a Casino Royale, un emocionante juego de casino donde tu objetivo es convertir una pequeña cantidad de 200€ en 1000€ (en el modo normal) a través de una serie de apuestas en varios juegos clásicos de casino. Este desafiante reto pondrá a prueba tu habilidad para gestionar el dinero.");
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
-    }   
+    }      
 
-    public Jugador crearJugador(){
-        // Inicializacion de variables
-        Scanner input = new Scanner( System.in);
-        Jugador jugador;
+    // Crear al Jugador
+    public Jugador crearJugador() {
+        
+        // Inicialización de variables
+        Scanner input = new Scanner(System.in);
         String nombre;
         int edad;
-        char opcion = 'x';
+        char confirmacion;
+        double dinero = 0f;
+        int dificultad = 0;
 
-        System.out.println("Cuentame un poco sobre ti : ");
+        System.out.println("Cuéntame un poco sobre ti:");
         do {
+            
             // Nombre
-            System.out.println("Tu nombre es? ");
+            System.out.println("¿Cuál es tu nombre?");
             nombre = input.nextLine();
             System.out.println("Con que te llamas " + nombre);
+            
             // Edad
-            System.out.println(nombre + " y cuantos añso tines? ");
+            System.out.println(nombre + ", ¿cuántos años tienes?");
+            while (!input.hasNextInt()) {
+                System.out.println("Por favor, ingresa una edad válida.");
+                input.next(); 
+            }
             edad = input.nextInt();
-            input.nextLine();
-            // Comprobacion de campos
-            System.out.println("Con que te llamas "+ nombre + "y tienes " + edad + "correcto ? S/n");
-            opcion = input.nextLine().charAt(0);
-        } while (opcion != 'S');
-        input.close();
+            input.nextLine(); 
+            
+            // Dificultad
+            do {
+                System.out.println("Selecciona la dificultad:\n\t1. Fácil -> 500€\n\t2. Normal -> 200€\n\t3. Difícil -> 50€");
+                while (!input.hasNextInt()) {
+                    System.out.println("Por favor, selecciona una opción válida.");
+                    input.next(); // Limpiar el buffer
+                }
+                dificultad = input.nextInt();
+                input.nextLine(); // Limpiar el buffer
+            } while (dificultad != 1 && dificultad != 2 && dificultad != 3);
+            
+            // Asignación del dinero según la dificultad
+            switch (dificultad) {
+                case 1:
+                    dinero = 500f;
+                    break;
+                case 2:
+                    dinero = 200f;
+                    break;
+                case 3:
+                    dinero = 50f;
+                    break;
+                default:
+                    System.out.println("Error: Dinero no configurado.");
+                    break;
+            }
+            
+            // Confirmación de los datos
+            System.out.println("Te llamas " + nombre + " y tienes " + edad + " años, ¿es correcto? S/n");
+            confirmacion = input.nextLine().charAt(0);
+
+        } while (confirmacion != 'S' && confirmacion != 's');
         
-        jugador = new Jugador(nombre, edad, 200f);
+        input.close();
+
+        // Crear el jugador con los datos confirmados
+        Jugador jugador = new Jugador(nombre, edad, dinero);
         
         return jugador;
     }
 
-    public boolean mayorEdad(){
-        if (jugador.getEdad() >= 18){
-            
+    // Verificar si el jugador es mayor de edad
+    public boolean mayorEdad() {
+        if (jugador.getEdad() >= 18) {
             return true;
-        }
-        else {
-            System.out.println("Lo sentimos pero menores de edad no pueden entrar al casino");
+        } else {
+            System.out.println("Lo sentimos, pero los menores de edad no pueden entrar al casino.");
             return false;
         }
     }
