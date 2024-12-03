@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\pedro\\Downloads\\jline-terminal-3.27.1.jar"
+    ]
+}

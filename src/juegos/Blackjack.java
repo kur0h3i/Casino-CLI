@@ -1,9 +1,9 @@
-package juegos.blackjack;
+package juegos;
 
 import recursos.Baraja;
 import recursos.Carta;
 
-public class BlackJack {
+public class Blackjack {
     
     // Atributos
     private Baraja baraja;
@@ -11,7 +11,7 @@ public class BlackJack {
     private Jugador crupier;
 
     // Constructor
-    public BlackJack() {
+    public Blackjack() {
         baraja = new Baraja();
         jugador = new Jugador("Jugador");
         crupier = new Jugador("Crupier");

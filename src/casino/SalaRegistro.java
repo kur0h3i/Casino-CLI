@@ -7,7 +7,7 @@ import personas.*;
 public class SalaRegistro {
     
     // Atributos
-    Jugador jugador;
+    public static Jugador jugador;
 
     // Constructor
     public SalaRegistro() {
@@ -40,18 +40,17 @@ public class SalaRegistro {
 
     // Crear al Jugador
     public Jugador crearJugador() {
-        
         // Inicialización de variables
-        Scanner input = new Scanner(System.in);
+        @SuppressWarnings("resource")
+        Scanner input = new Scanner(System.in); // No lo cierres
         String nombre;
         int edad;
         char confirmacion;
         double dinero = 0f;
         int dificultad = 0;
-
+    
         System.out.println("Cuéntame un poco sobre ti:");
         do {
-            
             // Nombre
             System.out.println("¿Cuál es tu nombre?");
             nombre = input.nextLine();
@@ -96,16 +95,17 @@ public class SalaRegistro {
             // Confirmación de los datos
             System.out.println("Te llamas " + nombre + " y tienes " + edad + " años, ¿es correcto? S/n");
             confirmacion = input.nextLine().charAt(0);
-
+    
         } while (confirmacion != 'S' && confirmacion != 's');
         
-        input.close();
-
+        // input.close(); // Elimina esta línea
+    
         // Crear el jugador con los datos confirmados
         Jugador jugador = new Jugador(nombre, edad, dinero);
         
         return jugador;
     }
+    
 
     // Verificar si el jugador es mayor de edad
     public boolean mayorEdad() {
@@ -116,4 +116,5 @@ public class SalaRegistro {
             return false;
         }
     }
+
 }
