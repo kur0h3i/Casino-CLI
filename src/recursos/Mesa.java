@@ -36,7 +36,9 @@ public class Mesa {
         return posicionInteractuar;
     }
 
-    // Dispo
+    public void jugar(){
+        juego.iniciarPartida();
+    }
 
 
 }

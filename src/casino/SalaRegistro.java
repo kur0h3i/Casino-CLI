@@ -95,6 +95,7 @@ public class SalaRegistro {
             // Confirmación de los datos
             System.out.println("Te llamas " + nombre + " y tienes " + edad + " años, ¿es correcto? S/n");
             confirmacion = input.nextLine().charAt(0);
+            input.nextLine();
     
         } while (confirmacion != 'S' && confirmacion != 's');
         
