@@ -25,7 +25,7 @@ public class SalaPrincipal {
         
         // Mesas disponibles (agregar las mesas a la lista)
         List<Mesa> mesas = new ArrayList<>();
-        mesas.add(new Mesa(new Ruleta(jugador.getFichas()), "Ruleta", 1, new int[][]{{9, 4}})); // Asegúrate de que la posición es correcta
+        mesas.add(new Mesa(new Ruleta(), "Ruleta", 1, new int[][]{{9, 4}})); // Asegúrate de que la posición es correcta
         
             boolean running = true;
             while (running) {
@@ -39,7 +39,7 @@ public class SalaPrincipal {
     
 
     // Limpiar pantalla (función para terminal)
-    public void limpiarPantalla() {
+    public static void limpiarPantalla() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
@@ -125,8 +125,7 @@ public class SalaPrincipal {
                  // Verificar si estamos en la posición de la mesa y unirse
                  for (Mesa mesa : mesas) {
                      if (mesa.getPosicionInteractuar()[0][0] == posX && mesa.getPosicionInteractuar()[0][1] == posY) {
-                         limpiarPantalla();
-                         jugador.setDinero(jugador.getDinero() + 100f);
+                        mesa.jugar();
                      }
                  }
                  break;
