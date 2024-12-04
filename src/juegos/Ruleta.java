@@ -4,12 +4,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 import casino.SalaPrincipal;
+import personas.Jugador;
 
 public class Ruleta extends Juego {
     
     // Atributo
     int apuesta;
+    Jugador jugador;
     
+    public Ruleta(Jugador jugador){
+        this.jugador = jugador;
+    }
+
     public void iniciarPartida(){
         Scanner input = new Scanner(System.in);
         int opcion = 0;
@@ -51,6 +57,10 @@ public class Ruleta extends Juego {
     };
 
     public void interfazRuleta(){
+        System.out.println("----------------------------");
+        System.out.println("Nombre :  " + jugador.getName());
+        System.out.println("Fichas : " + jugador.getFichas());
+        System.out.println("----------------------------");
         System.out.println("_________________________________________________________________________");
         System.out.println("|     | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 | 27 | 30 | 33 | 36 | 2 to 1 |");
         System.out.println("|     -------------------------------------------------------------------");
@@ -67,8 +77,8 @@ public class Ruleta extends Juego {
     // Mostrar los porcentages de ganancia
     public void cheetsheet() {
         System.out.println("__________________________ CHEET SHEET __________________________");
-        System.out.println("| Tipo de Apuesta        | Ejemplo         | Pago               |");
-        System.out.println("|-------------------------|-----------------|--------------------|");
+        System.out.println("| Tipo de Apuesta         | Ejemplo        | Pago               |");
+        System.out.println("|-------------------------|----------------|--------------------|");
         System.out.println("| Número Individual       | 7              | 35 a 1             |");
         System.out.println("| Apuesta Split           | 7 y 8          | 17 a 1             |");
         System.out.println("| Apuesta Street          | 7, 8, 9        | 11 a 1             |");
