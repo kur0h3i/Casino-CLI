@@ -46,6 +46,21 @@ public class Jugador {
         return this.fichas;
     }
 
+    public void agregarFichas(int fichas){
+        this.fichas += fichas;
+    }
+
+    public void restarFichas(int fichas){
+        this.fichas -= fichas;
+    }
+
+    public void datosUsuarioEnPartida(){
+        System.out.println("----------------------------");
+        System.out.println("Nombre :  " + this.getName());
+        System.out.println("Fichas : " + this.getFichas());
+        System.out.println("----------------------------");
+    }
+
     // to String
     @Override
     public String toString(){

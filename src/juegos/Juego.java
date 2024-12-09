@@ -4,12 +4,7 @@ import java.util.Scanner;
 
 public abstract class Juego {
 
-    // Atributos
-    int fichasApostadas;
-    int fichasActuales;
-
     // Métodos abstractos que se deben implementar en clases hijas
-    public abstract int resultadoFichas();
     public abstract void iniciarPartida();
     
     public int definirApuesta() {

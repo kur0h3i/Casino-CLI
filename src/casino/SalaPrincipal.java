@@ -1,4 +1,4 @@
- package casino;
+package casino;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +36,6 @@ public class SalaPrincipal {
             }
                
     }
-    
 
     // Limpiar pantalla (función para terminal)
     public static void limpiarPantalla() {
