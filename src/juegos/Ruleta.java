@@ -7,59 +7,76 @@ import casino.SalaPrincipal;
 import personas.Jugador;
 
 public class Ruleta extends Juego {
-    
-    // Atributo
-    int apuesta;
-    Jugador jugador;
-    
-    public Ruleta(Jugador jugador){
+
+    // Atributos
+    private int apuesta; // Cantidad de fichas apostadas en esta partida
+    private Jugador jugador; // Jugador participando en la partida
+
+    public Ruleta(Jugador jugador) {
         this.jugador = jugador;
     }
 
-    public void iniciarPartida(){
-        Scanner input = new Scanner(System.in);
-        int opcion = 0;
+    public void iniciarPartida() {
+        try (Scanner input = new Scanner(System.in)) {
+            int opcion = 0;
 
-        // Definir apuesta
-        apuesta = definirApuesta();
-        while (opcion != 4){
-            SalaPrincipal.limpiarPantalla();
-            interfazRuleta();
-            System.out.println("Elige una opcion\n1.Apostar por una opcion y girar\n2.Girar\n3.Cheetsheet\n4.Salir");
-            opcion = input.nextInt();
-            input.nextLine();
-
-            // Opciones Menu
-            switch (opcion) {
-                case 1:
-                    System.out.println("Elegir Opcion");
-                    opcionesDeApuesta();
-                    System.out.println("q para salir");
-                    input.nextLine();
-                    break;
-                case 2:
-                    System.out.println("Girar");
-                    tirarRuleta();
-                    System.out.println("q para salir");
-                    input.nextLine();
-                    break;
-                case 3: 
-                    cheetsheet();
-                    System.out.println("q para salir");
-                    input.nextLine();
-                    break;
-                case 4:
-                    System.out.println("Saliendo...");
-                    SalaPrincipal.limpiarPantalla();
-                    break;
+            // Verificar que el jugador tiene fichas suficientes para jugar
+            if (jugador.getFichas() <= 0) {
+                System.out.println("No tienes suficientes fichas para jugar. Por favor, recarga fichas.");
+                return;
             }
 
+            while (opcion != 4) {
+                SalaPrincipal.limpiarPantalla();
+                interfazRuleta();
+                System.out.println("Elige una opción:");
+                System.out.println("1. Apostar por una opción y girar");
+                System.out.println("2. Girar (sin apostar)");
+                System.out.println("3. Ver Cheetsheet");
+                System.out.println("4. Salir");
+                try {
+                    opcion = input.nextInt();
+                    input.nextLine(); // Limpiar el buffer
+
+                    // Opciones del menú principal
+                    switch (opcion) {
+                        case 1:
+                            if (!definirApuesta(input)) {
+                                break;
+                            }
+                            opcionesDeApuesta(input);
+                            break;
+                        case 2:
+                            System.out.println("Girar la ruleta (sin apostar).");
+                            tirarRuleta();
+                            esperarTecla(input);
+                            break;
+                        case 3:
+                            cheetsheet();
+                            esperarTecla(input);
+                            break;
+                        case 4:
+                            System.out.println("Saliendo del juego...");
+                            SalaPrincipal.limpiarPantalla();
+                            break;
+                        default:
+                            System.out.println("Opción no válida. Intenta de nuevo.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Entrada no válida. Intenta de nuevo.");
+                    input.nextLine(); // Limpiar el buffer
+                }
+            }
         }
-        
+    }
+
+    private void esperarTecla(Scanner input) {
+        System.out.println("Presiona Enter para continuar...");
+        input.nextLine();
     }
 
 
-    public void interfazRuleta(){
+    public void interfazRuleta() {
         jugador.datosUsuarioEnPartida();
         System.out.println("_________________________________________________________________________");
         System.out.println("|     | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 | 27 | 30 | 33 | 36 | 2 to 1 |");
@@ -74,7 +91,6 @@ public class Ruleta extends Juego {
         System.out.println("|_____|_________________________________________________________________|");
     }
 
-    // Mostrar los porcentages de ganancia
     public void cheetsheet() {
         System.out.println("__________________________ CHEET SHEET __________________________");
         System.out.println("| Tipo de Apuesta         | Ejemplo        | Pago               |");
@@ -86,21 +102,43 @@ public class Ruleta extends Juego {
         System.out.println("| Par / Impar             | Par            | x1                 |");
         System.out.println("|_______________________________________________________________|");
     }
-    
+
     public int tirarRuleta() {
         Random random = new Random();
-        // Genera un número aleatorio entre 0 y 36
         int resultado = random.nextInt(37);
+        System.out.println("La ruleta gira... El número es: " + resultado);
         return resultado;
     }
 
-    public void opcionesDeApuesta() {
-        Scanner input = new Scanner(System.in);
+    public boolean definirApuesta(Scanner input) {
+        System.out.println("Tienes " + jugador.getFichas() + " fichas.");
+        System.out.print("¿Cuántas fichas deseas apostar? ");
+        try {
+            apuesta = input.nextInt();
+            input.nextLine();
+
+            if (apuesta <= 0) {
+                System.out.println("La apuesta debe ser mayor que 0.");
+                return false;
+            } else if (apuesta > jugador.getFichas()) {
+                System.out.println("No tienes suficientes fichas para realizar esta apuesta.");
+                return false;
+            }
+
+            jugador.restarFichas(apuesta);
+            System.out.println("Apuesta realizada con éxito. ¡Buena suerte!");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Entrada inválida. Intenta de nuevo.");
+            input.nextLine();
+            return false;
+        }
+    }
+
+    public void opcionesDeApuesta(Scanner input) {
         int opcion = 0;
-        
-        // Bucle para mostrar opciones hasta que el usuario elija salir
-        while (opcion != 6) { // Supongamos que el 8 es la opción de salir
-            SalaPrincipal.limpiarPantalla();
+        SalaPrincipal.limpiarPantalla();
+        while (opcion != 6) {
             jugador.datosUsuarioEnPartida();
             System.out.println("_______________________");
             System.out.println("| Opciones de Apuesta   |");
@@ -112,46 +150,39 @@ public class Ruleta extends Juego {
             System.out.println("| 6. Salir              |");
             System.out.println("|_______________________|");
             System.out.print("Elige una opción: ");
-    
-            // Leer la opción del usuario
+
             try {
                 opcion = input.nextInt();
+
+                switch (opcion) {
+                    case 1:
+                        apostarPorColor(input);
+                        break;
+                    case 2:
+                        apostarParImpar(input);
+                        break;
+                    case 3:
+                        apostarPorNumero(input);
+                        break;
+                    case 4:
+                        apostarPorDocena(input);
+                        break;
+                    case 5:
+                        apostarMitad(input);
+                        break;
+                    case 6:
+                        System.out.println("Saliendo de las opciones de apuesta...");
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Intenta de nuevo.");
+                }
             } catch (Exception e) {
                 System.out.println("Entrada no válida. Intenta de nuevo.");
-                input.nextLine(); // Limpiar el buffer
-                continue;
-            }
-    
-            // Lógica para cada opción de apuesta
-            switch (opcion) {
-                case 1:
-                    System.out.println("Has elegido apostar por el color.");
-                    apostarPorColor();
-                    break;
-                case 2:
-                    System.out.println("Has elegido apostar por Par / Impar.");
-                    apostarParImpar();
-                    break;
-                case 3:
-                    System.out.println("Has elegido apostar a un número individual.");
-                    apostarPorNumero();
-                    break;
-                case 4:
-                    System.out.println("Has elegido apostar por una docena.");
-                    apostarPorDocena();
-                    break;
-                case 5:
-                    System.out.println("Has elegido apostar por mitad (1-18 o 19-36).");
-                    apostarMitad();
-                    break;
-                case 6:
-                    System.out.println("Saliendo de las opciones de apuesta...");
-                    break;
-                default:
-                    System.out.println("Opción no válida. Intenta de nuevo.");
+                input.nextLine();
             }
         }
     }
+
 
     // Determina si un número es rojo o negro
     private boolean esNumeroRojo(int numero) {
@@ -165,15 +196,13 @@ public class Ruleta extends Juego {
         return false;
     }
 
-    public void apostarPorColor() {
-        Scanner input = new Scanner(System.in);
+    public void apostarPorColor(Scanner input) {
         System.out.println("Elige un color: 1 para Rojo, 2 para Negro:");
         int color = input.nextInt();
     
         int resultado = tirarRuleta();
         boolean esRojo = esNumeroRojo(resultado);
     
-        System.out.println("La ruleta gira... El número es: " + resultado);
         if ((color == 1 && esRojo) || (color == 2 && !esRojo)) {
             System.out.println("¡Felicidades! Ganaste x1 tu apuesta.");
             jugador.agregarFichas(apuesta * 2); // Ganancia: la apuesta inicial más el premio
@@ -183,13 +212,11 @@ public class Ruleta extends Juego {
         }
     }
     
-    public void apostarParImpar() {
-        Scanner input = new Scanner(System.in);
+    public void apostarParImpar(Scanner input) {
         System.out.println("Elige: 1 para Par, 2 para Impar:");
         int eleccion = input.nextInt();
     
         int resultado = tirarRuleta();
-        System.out.println("La ruleta gira... El número es: " + resultado);
     
         boolean esPar = (resultado != 0 && resultado % 2 == 0);
         if ((eleccion == 1 && esPar) || (eleccion == 2 && !esPar)) {
@@ -201,8 +228,7 @@ public class Ruleta extends Juego {
         }
     }
     
-    public void apostarPorNumero() {
-        Scanner input = new Scanner(System.in);
+    public void apostarPorNumero(Scanner input) {
         System.out.println("Elige un número entre 0 y 36:");
         int numeroApostado = input.nextInt();
     
@@ -212,7 +238,6 @@ public class Ruleta extends Juego {
         }
     
         int resultado = tirarRuleta();
-        System.out.println("La ruleta gira... El número es: " + resultado);
     
         if (numeroApostado == resultado) {
             System.out.println("¡Felicidades! Ganaste x35 tu apuesta!");
@@ -223,8 +248,7 @@ public class Ruleta extends Juego {
         }
     }
 
-    public void apostarPorDocena() {
-        Scanner input = new Scanner(System.in);
+    public void apostarPorDocena(Scanner input) {
     
         System.out.println("Elige una docena: 1 (1-12), 2 (13-24), o 3 (25-36):");
         int docena = input.nextInt();
@@ -235,7 +259,6 @@ public class Ruleta extends Juego {
         }
     
         int resultado = tirarRuleta();
-        System.out.println("La ruleta gira... El número es: " + resultado);
     
         if ((docena == 1 && resultado >= 1 && resultado <= 12) ||
             (docena == 2 && resultado >= 13 && resultado <= 24) ||
@@ -249,8 +272,7 @@ public class Ruleta extends Juego {
     }
     
     
-    public void apostarMitad() {
-        Scanner input = new Scanner(System.in);
+    public void apostarMitad(Scanner input) {
     
         System.out.println("Elige una mitad: 1 (1-18) o 2 (19-36):");
         int mitad = input.nextInt();
@@ -261,7 +283,6 @@ public class Ruleta extends Juego {
         }
     
         int resultado = tirarRuleta();
-        System.out.println("La ruleta gira... El número es: " + resultado);
     
         if ((mitad == 1 && resultado >= 1 && resultado <= 18) ||
             (mitad == 2 && resultado >= 19 && resultado <= 36)) {
