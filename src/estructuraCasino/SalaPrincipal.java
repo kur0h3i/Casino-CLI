@@ -23,7 +23,7 @@ public class SalaPrincipal {
         // Mesas disponibles (agregar las mesas a la lista)
         ArrayList<Mesa> mesas = new ArrayList<>();
         mesas.add(new Mesa(new Ruleta(jugador), "Ruleta", 1, new int[][]{{9, 4}})); 
-        mesas.add(new Mesa(new Ruleta(jugador), "Poker", 1, new int[][]{{9, 4}}));
+        mesas.add(new Mesa(new Ruleta(jugador), "Poker", 1, new int[][]{{11, 3}}));
 
         boolean running = true;
         while (running) {

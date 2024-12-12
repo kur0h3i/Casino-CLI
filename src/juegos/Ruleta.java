@@ -1,5 +1,6 @@
 package juegos;
 
+// Util
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -18,6 +19,7 @@ public class Ruleta extends Juego {
         this.jugador = jugador;
     }
 
+    @SuppressWarnings("resource")
     public void iniciarPartida() {
         Scanner input = new Scanner(System.in); 
         int opcion = 0;
@@ -70,7 +72,6 @@ public class Ruleta extends Juego {
                 }
             }
         }
-    }
 
     private void esperarTecla(Scanner input) {
         System.out.println("Presiona Enter para continuar...");
