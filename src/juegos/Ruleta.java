@@ -19,8 +19,8 @@ public class Ruleta extends Juego {
     }
 
     public void iniciarPartida() {
-        try (Scanner input = new Scanner(System.in)) {
-            int opcion = 0;
+        Scanner input = new Scanner(System.in); 
+        int opcion = 0;
 
             // Verificar que el jugador tiene fichas suficientes para jugar
             if (jugador.getFichas() <= 0) {
