@@ -1,4 +1,4 @@
-package recursos;
+package opcionesSala;
 
 import juegos.Juego;
 import juegos.Poker;

@@ -8,8 +8,8 @@ import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
 import juegos.*;
+import opcionesSala.Mesa;
 import personas.Jugador;
-import recursos.Mesa;
 
 public class SalaPrincipal {
 
