@@ -1,4 +1,4 @@
-package opcionesSala;
+package accionesCasino;
 
 import juegos.Juego;
 import juegos.Poker;

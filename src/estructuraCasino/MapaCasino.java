@@ -1,4 +1,4 @@
-package casino;
+package estructuraCasino;
 
 public class MapaCasino {
     static char[][] mapa = {

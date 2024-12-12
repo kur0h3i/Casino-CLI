@@ -1,4 +1,4 @@
-package opcionesSala;
+package accionesCasino;
 
 public class puertaSalida {
     

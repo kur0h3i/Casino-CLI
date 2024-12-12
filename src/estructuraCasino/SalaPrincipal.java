@@ -1,4 +1,4 @@
-package casino;
+package estructuraCasino;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,8 +7,8 @@ import java.util.List;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
+import accionesCasino.Mesa;
 import juegos.*;
-import opcionesSala.Mesa;
 import personas.Jugador;
 
 public class SalaPrincipal {

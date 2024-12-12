@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-import casino.SalaPrincipal;
+import estructuraCasino.SalaPrincipal;
 import personas.Jugador;
 import excep.jugadorSinFichasExcepcion;
 

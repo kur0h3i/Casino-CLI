@@ -1,4 +1,4 @@
-package casino;
+package estructuraCasino;
 
 import java.util.Scanner;
 

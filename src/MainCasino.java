@@ -2,7 +2,7 @@
 
 import java.io.IOException;
 
-import casino.*;
+import estructuraCasino.*;
 
 public class MainCasino {
     public static void main(String[] args) throws IOException {
