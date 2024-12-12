@@ -1,12 +1,14 @@
 package estructuraCasino;
 
+// Excepciones
 import java.io.IOException;
+import java.util.Scanner;
+
+// Util
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jline.terminal.Terminal;
-import org.jline.terminal.TerminalBuilder;
-
+// Mesa, Juegos y Personas
 import accionesCasino.Mesa;
 import juegos.*;
 import personas.Jugador;
@@ -17,25 +19,25 @@ public class SalaPrincipal {
     int posX = MapaCasino.posX;
     int posY = MapaCasino.posY;
 
-    public SalaPrincipal(Jugador jugador) throws IOException {
-        // Construir Terminal
-        Terminal terminal = TerminalBuilder.terminal();
-        
+    public SalaPrincipal(Jugador jugador) {
+        Scanner scanner = new Scanner(System.in);
+
         jugador.setFichas(100); // Fichas iniciales del jugador
-        
+
         // Mesas disponibles (agregar las mesas a la lista)
         List<Mesa> mesas = new ArrayList<>();
         mesas.add(new Mesa(new Ruleta(jugador), "Ruleta", 1, new int[][]{{9, 4}})); 
         mesas.add(new Mesa(new Ruleta(jugador), "Poker", 1, new int[][]{{9, 4}}));
-        
-            boolean running = true;
-            while (running) {
-                limpiarPantalla();
-                interfazPrincipal(jugador, mesas);
-                salirPuerta();
-                entradaTermianal(terminal, jugador, mesas);
-            }
-               
+
+        boolean running = true;
+        while (running) {
+            limpiarPantalla();
+            interfazPrincipal(jugador, mesas);
+            salirPuerta();
+            entradaTerminal(scanner, jugador, mesas);
+        }
+
+        scanner.close();
     }
 
     // Limpiar pantalla (función para terminal)
@@ -59,7 +61,7 @@ public class SalaPrincipal {
 
         // Instrucciones de control
         System.out.println("Usa WASD para moverte, E para unirte a la mesa, Q para salir:");
-        
+
         // Interacción con mesas
         for (Mesa mesa : mesas) {
             if (mesa.getPosicionInteractuar()[0][0] == posX && mesa.getPosicionInteractuar()[0][1] == posY) {
@@ -104,33 +106,34 @@ public class SalaPrincipal {
         }
     }
 
-    public void entradaTermianal(Terminal terminal, Jugador jugador, List<Mesa> mesas) throws IOException{
-         // Leer entrada del teclado
-        int key = terminal.reader().read();
-    
-        switch (key) {
-             case 'w':
-                 moverJugador(0, -1);
-                 break;
-             case 's':
-                 moverJugador(0, 1);
-                 break;
-             case 'a':
-                 moverJugador(-1, 0);
-                 break;
-             case 'd':
-                 moverJugador(1, 0);
-                 break;
-             case 'e':
-                 // Verificar si estamos en la posición de la mesa y unirse
-                 for (Mesa mesa : mesas) {
-                     if (mesa.getPosicionInteractuar()[0][0] == posX && mesa.getPosicionInteractuar()[0][1] == posY) {
+    public void entradaTerminal(Scanner scanner, Jugador jugador, List<Mesa> mesas) {
+        // Leer entrada del teclado
+        String input = scanner.nextLine().toLowerCase();
+
+        switch (input) {
+            case "w":
+                moverJugador(0, -1);
+                break;
+            case "s":
+                moverJugador(0, 1);
+                break;
+            case "a":
+                moverJugador(-1, 0);
+                break;
+            case "d":
+                moverJugador(1, 0);
+                break;
+            case "e":
+                // Verificar si estamos en la posición de la mesa y unirse
+                for (Mesa mesa : mesas) {
+                    if (mesa.getPosicionInteractuar()[0][0] == posX && mesa.getPosicionInteractuar()[0][1] == posY) {
                         mesa.jugar();
-                     }
-                 }
-                 break;
-             case 'q':
-                 break;
+                    }
+                }
+                break;
+            case "q":
+                System.exit(0);
+                break;
         }
     }
 }

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MainCasino",
+            "request": "launch",
+            "mainClass": "MainCasino",
+            "projectName": "ProyectoCasinoJava_57ad0194"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

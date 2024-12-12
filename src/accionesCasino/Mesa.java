@@ -1,8 +1,6 @@
 package accionesCasino;
 
 import juegos.Juego;
-import juegos.Poker;
-import juegos.Ruleta;
 
 public class Mesa {
     
