@@ -1,10 +1,12 @@
 package juegos;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 import casino.SalaPrincipal;
 import personas.Jugador;
+import excep.jugadorSinFichasExcepcion;
 
 public class Ruleta extends Juego {
 
@@ -62,7 +64,7 @@ public class Ruleta extends Juego {
                         default:
                             System.out.println("Opción no válida. Intenta de nuevo.");
                     }
-                } catch (Exception e) {
+                } catch (InputMismatchException e) {
                     System.out.println("Entrada no válida. Intenta de nuevo.");
                     input.nextLine(); // Limpiar el buffer
                 }
@@ -108,6 +110,12 @@ public class Ruleta extends Juego {
         int resultado = random.nextInt(37);
         System.out.println("La ruleta gira... El número es: " + resultado);
         return resultado;
+    }
+
+
+    // Acabar la clase
+    public void comprobarFichasJugadorApuesta () throws jugadorSinFichasExcepcion{
+
     }
 
     public boolean definirApuesta(Scanner input) {
