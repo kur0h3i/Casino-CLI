@@ -1,16 +1,12 @@
 package estructuraCasino;
 
-// Excepciones
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// Util
-import java.util.ArrayList;
-import java.util.List;
-
-// Mesa, Juegos y Personas
+// Suponiendo que estos imports y clases existen
 import accionesCasino.Mesa;
-import juegos.*;
+import juegos.Ruleta;
 import personas.Jugador;
 
 public class SalaPrincipal {
@@ -25,7 +21,7 @@ public class SalaPrincipal {
         jugador.setFichas(100); // Fichas iniciales del jugador
 
         // Mesas disponibles (agregar las mesas a la lista)
-        List<Mesa> mesas = new ArrayList<>();
+        ArrayList<Mesa> mesas = new ArrayList<>();
         mesas.add(new Mesa(new Ruleta(jugador), "Ruleta", 1, new int[][]{{9, 4}})); 
         mesas.add(new Mesa(new Ruleta(jugador), "Poker", 1, new int[][]{{9, 4}}));
 
@@ -46,7 +42,7 @@ public class SalaPrincipal {
         System.out.flush();
     }
 
-    public void interfazPrincipal(Jugador jugador, List<Mesa> mesas){
+    public void interfazPrincipal(Jugador jugador, ArrayList<Mesa> mesas){
         // Interfaz del jugador
         System.out.println("----------------------------");
         System.out.println("Nombre :  " + jugador.getName());
@@ -106,34 +102,48 @@ public class SalaPrincipal {
         }
     }
 
-    public void entradaTerminal(Scanner scanner, Jugador jugador, List<Mesa> mesas) {
-        // Leer entrada del teclado
-        String input = scanner.nextLine().toLowerCase();
+    public void entradaTerminal(Scanner scanner, Jugador jugador, ArrayList<Mesa> mesas) {
+        boolean validInput = false;
+        
+        while (!validInput) {
+            try {
+                // Leer entrada del teclado
+                String input = scanner.nextLine().toLowerCase();
+                validInput = true;  // Asumir entrada válida hasta comprobar
 
-        switch (input) {
-            case "w":
-                moverJugador(0, -1);
-                break;
-            case "s":
-                moverJugador(0, 1);
-                break;
-            case "a":
-                moverJugador(-1, 0);
-                break;
-            case "d":
-                moverJugador(1, 0);
-                break;
-            case "e":
-                // Verificar si estamos en la posición de la mesa y unirse
-                for (Mesa mesa : mesas) {
-                    if (mesa.getPosicionInteractuar()[0][0] == posX && mesa.getPosicionInteractuar()[0][1] == posY) {
-                        mesa.jugar();
-                    }
+                switch (input) {
+                    case "w":
+                        moverJugador(0, -1);
+                        break;
+                    case "s":
+                        moverJugador(0, 1);
+                        break;
+                    case "a":
+                        moverJugador(-1, 0);
+                        break;
+                    case "d":
+                        moverJugador(1, 0);
+                        break;
+                    case "e":
+                        // Verificar si estamos en la posición de la mesa y unirse
+                        for (Mesa mesa : mesas) {
+                            if (mesa.getPosicionInteractuar()[0][0] == posX && mesa.getPosicionInteractuar()[0][1] == posY) {
+                                mesa.jugar();
+                            }
+                        }
+                        break;
+                    case "q":
+                        System.exit(0);
+                        break;
+                    default:
+                        validInput = false;  // Entrada no válida
+                        System.out.println("Comando no válido. Intenta de nuevo.");
                 }
-                break;
-            case "q":
-                System.exit(0);
-                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada no válida. Por favor, ingresa un comando válido.");
+                scanner.nextLine(); // Limpiar el buffer
+                validInput = false;  // Repetir el bucle para pedir entrada nuevamente
+            }
         }
     }
 }
