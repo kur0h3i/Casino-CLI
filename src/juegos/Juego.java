@@ -2,7 +2,7 @@ package juegos;
 
 import java.util.Scanner;
 
-import excep.ExcepcionjugadorSinFichas;
+import excep.ExcepcionJugadorSinFichas;
 import personas.Jugador;
 
 public abstract class Juego {
@@ -16,7 +16,7 @@ public abstract class Juego {
     }
 
     // Métodos abstractos que se deben implementar en clases hijas
-    public abstract void iniciarPartida() throws ExcepcionjugadorSinFichas;
+    public abstract void iniciarPartida() throws ExcepcionJugadorSinFichas;
     
     public int definirApuesta() {
         int apuesta = 0;
@@ -27,9 +27,9 @@ public abstract class Juego {
         return apuesta;
     }
 
-    public void comprobarfichas() throws ExcepcionjugadorSinFichas{
+    public void comprobarfichas() throws ExcepcionJugadorSinFichas{
         if (jugador.getFichas() <= 0) {
-            throw new ExcepcionjugadorSinFichas("Jugador sin fichas");
+            throw new ExcepcionJugadorSinFichas("Jugador sin fichas");
         }
     }
 }

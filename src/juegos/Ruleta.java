@@ -8,8 +8,9 @@ import java.util.Scanner;
 // Propias
 import estructuraCasino.SalaPrincipal;
 import personas.Jugador;
-import excep.ExcepcionjugadorSinFichas;
+import excep.ExcepcionJugadorSinFichas;
 import ascii.ASCIIRuleta;
+import ascii.ASCIIGeneral;
 
 public class Ruleta extends Juego {
 
@@ -28,7 +29,7 @@ public class Ruleta extends Juego {
 
     // Metodos
     // Iniciar Partida
-    public void iniciarPartida() throws ExcepcionjugadorSinFichas{
+    public void iniciarPartida() throws ExcepcionJugadorSinFichas{
         Scanner input = new Scanner(System.in); 
         comprobarfichas();
         menuPartida(input);       
@@ -61,15 +62,16 @@ public class Ruleta extends Juego {
                             break;
                         }
                         opcionesDeApuesta(input);
+                        ASCIIGeneral.esperarTecla();
                         break;
                     case 2:
                         System.out.println("Girar la ruleta (sin apostar).");
                         tirarRuleta();
-                        esperarTecla(input);
+                        ASCIIGeneral.esperarTecla();
                         break;
                     case 3:
                         interfaz.cheetsheet();
-                        esperarTecla(input);
+                        ASCIIGeneral.esperarTecla();
                         break;
                     case 4:
                         System.out.println("Saliendo del juego...");

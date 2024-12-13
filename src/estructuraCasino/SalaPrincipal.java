@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 // Suponiendo que estos imports y clases existen
 import accionesCasino.Mesa;
-import excep.ExcepcionjugadorSinFichas;
+import excep.ExcepcionJugadorSinFichas;
 import juegos.Ruleta;
 import personas.Jugador;
 
@@ -16,7 +16,7 @@ public class SalaPrincipal {
     int posX = MapaCasino.posX;
     int posY = MapaCasino.posY;
 
-    public SalaPrincipal(Jugador jugador) throws ExcepcionjugadorSinFichas {
+    public SalaPrincipal(Jugador jugador) throws ExcepcionJugadorSinFichas {
         Scanner scanner = new Scanner(System.in);
 
         //jugador.setFichas(100); // Fichas iniciales del jugador
@@ -103,7 +103,7 @@ public class SalaPrincipal {
         }
     }
 
-    public void entradaTerminal(Scanner scanner, Jugador jugador, ArrayList<Mesa> mesas) throws ExcepcionjugadorSinFichas {
+    public void entradaTerminal(Scanner scanner, Jugador jugador, ArrayList<Mesa> mesas) throws ExcepcionJugadorSinFichas {
         boolean validInput = false;
         
         while (!validInput) {

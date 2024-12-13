@@ -1,7 +1,7 @@
 package excep;
 
-public class ExcepcionjugadorSinFichas extends Exception {
-    public ExcepcionjugadorSinFichas(String mensaje) { 
+public class ExcepcionJugadorSinFichas extends Exception {
+    public ExcepcionJugadorSinFichas(String mensaje) { 
         super(mensaje);
     }
 }
