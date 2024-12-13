@@ -1,5 +1,5 @@
 package accionesCasino;
 
-public class cajero {
-    
+public class Cajero {
+
 }

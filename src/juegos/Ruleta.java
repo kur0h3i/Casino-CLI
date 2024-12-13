@@ -5,118 +5,95 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+// Propias
 import estructuraCasino.SalaPrincipal;
 import personas.Jugador;
-import excep.jugadorSinFichasExcepcion;
+import excep.ExcepcionjugadorSinFichas;
+import ascii.ASCIIRuleta;
 
 public class Ruleta extends Juego {
 
     // Atributos
     private int apuesta; // Cantidad de fichas apostadas en esta partida
     private Jugador jugador; // Jugador participando en la partida
+    ASCIIRuleta interfaz;
 
+    // Constructor
     public Ruleta(Jugador jugador) {
+        super(jugador);
         this.jugador = jugador;
+        this.interfaz = new ASCIIRuleta(jugador);
     }
 
-    @SuppressWarnings("resource")
-    public void iniciarPartida() {
+
+    // Metodos
+    // Iniciar Partida
+    public void iniciarPartida() throws ExcepcionjugadorSinFichas{
         Scanner input = new Scanner(System.in); 
+        comprobarfichas();
+        menuPartida(input);       
+    }
+    
+
+    // Menu partida
+    private void menuPartida(Scanner input){
         int opcion = 0;
+        while (opcion != 4) {
+            // Monstrar Interfaz
+            SalaPrincipal.limpiarPantalla();
+            interfaz.interfazRuleta();
 
-            // Verificar que el jugador tiene fichas suficientes para jugar
-            if (jugador.getFichas() <= 0) {
-                System.out.println("No tienes suficientes fichas para jugar. Por favor, recarga fichas.");
-                return;
-            }
+            // Mostrar Opciones
+            System.out.println("Elige una opción:");
+            System.out.println("1. Apostar por una opción y girar");
+            System.out.println("2. Girar (sin apostar)");
+            System.out.println("3. Ver Cheetsheet");
+            System.out.println("4. Salir");
 
-            while (opcion != 4) {
-                SalaPrincipal.limpiarPantalla();
-                interfazRuleta();
-                System.out.println("Elige una opción:");
-                System.out.println("1. Apostar por una opción y girar");
-                System.out.println("2. Girar (sin apostar)");
-                System.out.println("3. Ver Cheetsheet");
-                System.out.println("4. Salir");
-                try {
-                    opcion = input.nextInt();
-                    input.nextLine(); // Limpiar el buffer
+            try {
+                opcion = input.nextInt();
+                input.nextLine(); // Limpiar el buffer
 
-                    // Opciones del menú principal
-                    switch (opcion) {
-                        case 1:
-                            if (!definirApuesta(input)) {
-                                break;
-                            }
-                            opcionesDeApuesta(input);
+                // Opciones del menú principal
+                switch (opcion) {
+                    case 1:
+                        if (!definirApuesta(input)) {
                             break;
-                        case 2:
-                            System.out.println("Girar la ruleta (sin apostar).");
-                            tirarRuleta();
-                            esperarTecla(input);
-                            break;
-                        case 3:
-                            cheetsheet();
-                            esperarTecla(input);
-                            break;
-                        case 4:
-                            System.out.println("Saliendo del juego...");
-                            SalaPrincipal.limpiarPantalla();
-                            break;
-                        default:
-                            System.out.println("Opción no válida. Intenta de nuevo.");
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("Entrada no válida. Intenta de nuevo.");
-                    input.nextLine(); // Limpiar el buffer
+                        }
+                        opcionesDeApuesta(input);
+                        break;
+                    case 2:
+                        System.out.println("Girar la ruleta (sin apostar).");
+                        tirarRuleta();
+                        esperarTecla(input);
+                        break;
+                    case 3:
+                        interfaz.cheetsheet();
+                        esperarTecla(input);
+                        break;
+                    case 4:
+                        System.out.println("Saliendo del juego...");
+                        SalaPrincipal.limpiarPantalla();
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Intenta de nuevo.");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada no válida. Intenta de nuevo.");
+                // Limpiar Buffer
+                input.nextLine(); 
             }
         }
-
-    private void esperarTecla(Scanner input) {
-        System.out.println("Presiona Enter para continuar...");
-        input.nextLine();
     }
 
 
-    public void interfazRuleta() {
-        jugador.datosUsuarioEnPartida();
-        System.out.println("_________________________________________________________________________");
-        System.out.println("|     | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 | 27 | 30 | 33 | 36 | 2 to 1 |");
-        System.out.println("|     |-----------------------------------------------------------------|");
-        System.out.println("|     | 2 | 5 | 8 | 11 | 14 | 17 | 20 | 23 | 26 | 29 | 32 | 35 | 2 to 1 |");
-        System.out.println("|     |-----------------------------------------------------------------|");
-        System.out.println("|  0  | 1 | 4 | 7 | 10 | 13 | 16 | 19 | 22 | 25 | 28 | 31 | 34 | 2 to 1 |");
-        System.out.println("|     |-----------------------------------------------------------------|");
-        System.out.println("|     |       1st 12        |       2nd 12      |         3rd 12        |");
-        System.out.println("|     |-----------------------------------------------------------------|");
-        System.out.println("|     |  1 to 18  |   PAR   |   RED   |  BLACK  |  IMPAR  |   19 to 36  |");
-        System.out.println("|_____|_________________________________________________________________|");
-    }
-
-    public void cheetsheet() {
-        System.out.println("__________________________ CHEET SHEET __________________________");
-        System.out.println("| Tipo de Apuesta         | Ejemplo        | Pago               |");
-        System.out.println("|-------------------------|----------------|--------------------|");
-        System.out.println("| Número Individual       | 7              | x35                |");
-        System.out.println("| Docena (1st, 2nd, 3rd)  | 1st 12         | x2                 |");
-        System.out.println("| Mitad (1-18 o 19-36)    | 1-18           | x1                 |");
-        System.out.println("| Rojo / Negro            | Rojo           | x1                 |");
-        System.out.println("| Par / Impar             | Par            | x1                 |");
-        System.out.println("|_______________________________________________________________|");
-    }
+    
 
     public int tirarRuleta() {
         Random random = new Random();
         int resultado = random.nextInt(37);
         System.out.println("La ruleta gira... El número es: " + resultado);
         return resultado;
-    }
-
-
-    // Acabar la clase
-    public void comprobarFichasJugadorApuesta () throws jugadorSinFichasExcepcion{
-
     }
 
     public boolean definirApuesta(Scanner input) {
@@ -148,18 +125,9 @@ public class Ruleta extends Juego {
         int opcion = 0;
         SalaPrincipal.limpiarPantalla();
         while (opcion != 6) {
-            jugador.datosUsuarioEnPartida();
-            System.out.println("_______________________");
-            System.out.println("| Opciones de Apuesta   |");
-            System.out.println("| 1. Color (Rojo/Negro) |");
-            System.out.println("| 2. Par / Impar        |");
-            System.out.println("| 3. Número Individual  |");
-            System.out.println("| 4. Docena             |");
-            System.out.println("| 5. Mitad              |");
-            System.out.println("| 6. Salir              |");
-            System.out.println("|_______________________|");
+            //interaz partida
+            interfaz.interfazPartida();
             System.out.print("Elige una opción: ");
-
             try {
                 opcion = input.nextInt();
 
@@ -302,8 +270,4 @@ public class Ruleta extends Juego {
             jugador.restarFichas(apuesta);
         }
     }
-    
-    
-    
-    
 }
