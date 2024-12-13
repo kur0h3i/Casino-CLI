@@ -2,10 +2,11 @@ package estructuraCasino;
 
 import java.util.Scanner;
 
-import personas.*;
+import excep.ExcepcionJugadorMenorEdad;
+import personas.Jugador;
 
 public class SalaRegistro {
-    
+
     // Atributos
     public static Jugador jugador;
 
@@ -15,8 +16,20 @@ public class SalaRegistro {
         asciiArt();
         // Información sobre el Casino
         informacionCasino();
-        // Datos del Jugador
+        // Crear al jugador
         jugador = crearJugador();
+        
+        // Verificar si es mayor de edad
+        try { 
+
+            mayorEdad();
+
+        } catch (ExcepcionJugadorMenorEdad e) {
+            // Manejar la excepción y terminar el registro
+            System.out.println(e.getMessage());
+            System.out.println("Registro cancelado");
+            System.exit(0); // Finalizar el programa
+        }
     }
 
     // ASCII ART
@@ -36,7 +49,7 @@ public class SalaRegistro {
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Bienvenidos a Casino Royale, un emocionante juego de casino donde tu objetivo es convertir una pequeña cantidad de 200€ en 1000€ (en el modo normal) a través de una serie de apuestas en varios juegos clásicos de casino. Este desafiante reto pondrá a prueba tu habilidad para gestionar el dinero.");
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
-    }      
+    }
 
     // Crear al Jugador
     public Jugador crearJugador() {
@@ -48,23 +61,23 @@ public class SalaRegistro {
         char confirmacion;
         double dinero = 0f;
         int dificultad = 0;
-    
+
         System.out.println("Cuéntame un poco sobre ti:");
         do {
             // Nombre
             System.out.println("¿Cuál es tu nombre?");
             nombre = input.nextLine();
             System.out.println("Con que te llamas " + nombre);
-            
+
             // Edad
             System.out.println(nombre + ", ¿cuántos años tienes?");
             while (!input.hasNextInt()) {
                 System.out.println("Por favor, ingresa una edad válida.");
-                input.next(); 
+                input.next();
             }
             edad = input.nextInt();
-            input.nextLine(); 
-            
+            input.nextLine();
+
             // Dificultad
             do {
                 System.out.println("Selecciona la dificultad:\n\t1. Fácil -> 500€\n\t2. Normal -> 200€\n\t3. Difícil -> 50€");
@@ -75,7 +88,7 @@ public class SalaRegistro {
                 dificultad = input.nextInt();
                 input.nextLine(); // Limpiar el buffer
             } while (dificultad != 1 && dificultad != 2 && dificultad != 3);
-            
+
             // Asignación del dinero según la dificultad
             switch (dificultad) {
                 case 1:
@@ -91,30 +104,23 @@ public class SalaRegistro {
                     System.out.println("Error: Dinero no configurado.");
                     break;
             }
-            
+
             // Confirmación de los datos
             System.out.println("Te llamas " + nombre + " y tienes " + edad + " años, ¿es correcto? S/n");
             confirmacion = input.nextLine().charAt(0);
-    
+
         } while (confirmacion != 'S' && confirmacion != 's');
-        
-        // input.close(); // Elimina esta línea
-    
+
         // Crear el jugador con los datos confirmados
-        Jugador jugador = new Jugador(nombre, edad, dinero);
-        
-        return jugador;
+        return new Jugador(nombre, edad, dinero);
     }
-    
 
     // Verificar si el jugador es mayor de edad
-    public boolean mayorEdad() {
+    public boolean mayorEdad() throws ExcepcionJugadorMenorEdad {
         if (jugador.getEdad() >= 18) {
             return true;
         } else {
-            System.out.println("Lo sentimos, pero los menores de edad no pueden entrar al casino.");
-            return false;
+            throw new ExcepcionJugadorMenorEdad("Lo sentimos, pero los menores de edad no pueden entrar al casino.");
         }
     }
-
 }
