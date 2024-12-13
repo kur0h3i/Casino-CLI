@@ -1,5 +1,9 @@
 package accionesCasino;
 
-public class Cajero {
 
+import personas.Jugador;
+
+
+public class Cajero {
+    
 }
