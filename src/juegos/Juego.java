@@ -8,7 +8,6 @@ import personas.Jugador;
 public abstract class Juego {
     
     // Atributos 
-    private int apuesta;
     private Jugador jugador;
 
     public Juego(Jugador jugador){
@@ -24,6 +23,7 @@ public abstract class Juego {
         System.out.println("Tu apuesta es : ");
         apuesta = input.nextInt();
         input.nextLine();
+        input.close();
         return apuesta;
     }
 

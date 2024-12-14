@@ -100,9 +100,7 @@ public class SalaPrincipal {
     public void salirPuerta(){
         // Puerta de salida
         if (posX == 4 && posY == 0) {
-            System.out.println("Usa E para guardar partida ");
-            System.out.println("Usa C para cargar partida ");
-            System.out.println("Usa Q para Salir");
+            System.out.println("Usa E para salir/guardar/cargar "); 
         }
     }
 
@@ -144,9 +142,6 @@ public class SalaPrincipal {
                         if (posX == 2 && posY == 7){
                             new Cajero(jugador);
                         }
-                        break;
-                    case "q":
-                        System.exit(0);
                         break;
                     default:
                         validInput = false;  // Entrada no válida
