@@ -11,6 +11,7 @@ import ascii.ASCIIBingo;
 
 public class Bingo extends Juego {
 
+    // Atributos
     private final int FILAS = 4;
     private final int COLUMNAS = 6;
     private String[][][] cartones;
@@ -21,6 +22,7 @@ public class Bingo extends Juego {
     private Jugador jugador;
     private ASCIIBingo interfaz;
 
+    // Constructor
     public Bingo(Jugador jugador) {
         super(jugador);
         this.jugador = jugador;
@@ -28,6 +30,7 @@ public class Bingo extends Juego {
         interfaz = new ASCIIBingo();
     }
 
+    // Metodos
     @Override
     public void iniciarPartida() throws ExcepcionJugadorSinFichas {
         Scanner input = new Scanner(System.in);
@@ -66,14 +69,16 @@ public class Bingo extends Juego {
         jugarBingo(numJugadores);
     }
 
+    // Generar Cartones
     private void generarCartones(int numJugadores) {
         Random random = new Random();
 
-        // Inicializar números disponibles (1-75)
+        // Numeros disponibles
         for (int i = 1; i <= 75; i++) {
             numerosDisponibles.add(i);
         }
 
+        // Rellenar el carton de bingo
         for (int k = 0; k < numJugadores; k++) {
             for (int i = 0; i < FILAS; i++) {
                 for (int j = 0; j < COLUMNAS; j++) {
@@ -95,6 +100,7 @@ public class Bingo extends Juego {
         imprimirCarton(cartones[0]); // Solo muestra el cartón del jugador principal
     }
 
+    // Mostrar el carton
     private void imprimirCarton(String[][] carton) {
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
@@ -104,6 +110,7 @@ public class Bingo extends Juego {
         }
     }
 
+    // Juego 
     private void jugarBingo(int numJugadores) {
         Random random = new Random();
     
@@ -165,7 +172,7 @@ public class Bingo extends Juego {
         }
     }
     
-
+    
     private void tacharNumero(String[][] carton, int numero) {
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
