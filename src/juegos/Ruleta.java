@@ -6,7 +6,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 // Propias
-import estructuraCasino.SalaPrincipal;
 import personas.Jugador;
 import excep.ExcepcionJugadorSinFichas;
 import ascii.ASCIIRuleta;
@@ -41,7 +40,7 @@ public class Ruleta extends Juego {
         int opcion = 0;
         while (opcion != 4) {
             // Monstrar Interfaz
-            SalaPrincipal.limpiarPantalla();
+            ASCIIGeneral.limpiarPantalla();
             interfaz.interfazRuleta();
 
             // Mostrar Opciones
@@ -75,7 +74,7 @@ public class Ruleta extends Juego {
                         break;
                     case 4:
                         System.out.println("Saliendo del juego...");
-                        SalaPrincipal.limpiarPantalla();
+                        ASCIIGeneral.limpiarPantalla();
                         break;
                     default:
                         System.out.println("Opción no válida. Intenta de nuevo.");
@@ -125,7 +124,7 @@ public class Ruleta extends Juego {
 
     public void opcionesDeApuesta(Scanner input) {
         int opcion = 0;
-        SalaPrincipal.limpiarPantalla();
+        ASCIIGeneral.limpiarPantalla();
         while (opcion != 6) {
             //interaz partida
             interfaz.interfazPartida();

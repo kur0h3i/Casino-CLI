@@ -46,12 +46,21 @@ public class Jugador {
         return this.fichas;
     }
 
+    // agregar / restar
     public void agregarFichas(int fichas){
         this.fichas += fichas;
     }
 
     public void restarFichas(int fichas){
         this.fichas -= fichas;
+    }
+
+    public void agregarDinero(int dinero){
+        this.dinero += dinero;
+    }
+
+    public void restarDinero(int dinero){
+        this.dinero -= dinero;
     }
 
     public void datosUsuarioEnPartida(){
@@ -66,11 +75,11 @@ public class Jugador {
     public String toString(){
         return "Jugador : " 
                 + this.nombre
-                + "Edad  : "
+                + "\nEdad  : "
                 + this.edad
-                + "Dinero : "
+                + "\nDinero : "
                 + this.dinero
-                + "Fichas"
+                + "\nFichas"
                 + this.fichas;
     }
 }

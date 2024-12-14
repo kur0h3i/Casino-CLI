@@ -6,18 +6,24 @@ import java.util.Scanner;
 
 // Suponiendo que estos imports y clases existen
 import accionesCasino.Mesa;
+import excep.ExcepcionJugadorSinDinero;
 import excep.ExcepcionJugadorSinFichas;
 import juegos.Ruleta;
 import personas.Jugador;
+import ascii.ASCIIGeneral;
+import accionesCasino.Cajero;
 
 public class SalaPrincipal {
 
     char[][] mapa = MapaCasino.mapa;
     int posX = MapaCasino.posX;
     int posY = MapaCasino.posY;
+    Jugador jugador;
+    ASCIIGeneral interzaf;
 
-    public SalaPrincipal(Jugador jugador) throws ExcepcionJugadorSinFichas {
+    public SalaPrincipal(Jugador jugador) throws ExcepcionJugadorSinFichas, ExcepcionJugadorSinDinero {
         Scanner scanner = new Scanner(System.in);
+        this.jugador = jugador;
 
         //jugador.setFichas(100); // Fichas iniciales del jugador
 
@@ -28,9 +34,10 @@ public class SalaPrincipal {
 
         boolean running = true;
         while (running) {
-            limpiarPantalla();
+            ASCIIGeneral.limpiarPantalla();
             interfazPrincipal(jugador, mesas);
             salirPuerta();
+            cajero();
             entradaTerminal(scanner, jugador, mesas);
         }
 
@@ -38,10 +45,6 @@ public class SalaPrincipal {
     }
 
     // Limpiar pantalla (función para terminal)
-    public static void limpiarPantalla() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
 
     public void interfazPrincipal(Jugador jugador, ArrayList<Mesa> mesas){
         // Interfaz del jugador
@@ -103,7 +106,13 @@ public class SalaPrincipal {
         }
     }
 
-    public void entradaTerminal(Scanner scanner, Jugador jugador, ArrayList<Mesa> mesas) throws ExcepcionJugadorSinFichas {
+    public void cajero(){
+        if (posX == 2 && posY == 7){
+            System.out.println("Usa E para entrar en el cajero");
+        }
+    }
+
+    public void entradaTerminal(Scanner scanner, Jugador jugador, ArrayList<Mesa> mesas) throws ExcepcionJugadorSinFichas, ExcepcionJugadorSinDinero {
         boolean validInput = false;
         
         while (!validInput) {
@@ -131,6 +140,9 @@ public class SalaPrincipal {
                             if (mesa.getPosicionInteractuar()[0][0] == posX && mesa.getPosicionInteractuar()[0][1] == posY) {
                                 mesa.jugar();
                             }
+                        }
+                        if (posX == 2 && posY == 7){
+                            new Cajero(jugador);
                         }
                         break;
                     case "q":
