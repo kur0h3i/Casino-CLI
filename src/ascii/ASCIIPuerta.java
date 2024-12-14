@@ -26,6 +26,6 @@ public class ASCIIPuerta {
         System.out.println("1. Guardar Partida");
         System.out.println("2. Cargar Partida");
         System.out.println("3. Salir del Casino");
-        System.out.println("3. Salir opciones");
+        System.out.println("4. Salir opciones");
     }
 }

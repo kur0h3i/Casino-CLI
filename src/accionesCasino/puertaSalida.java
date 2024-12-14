@@ -1,32 +1,71 @@
 package accionesCasino;
 
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import excep.ExcepcionJugadorNoEncontrado;
+import excep.ExcepcionJugadorSinDinero;
+import excep.ExcepcionJugadorSinFichas;
 import personas.Jugador;
-import ascii.ASCIICajero;
 import ascii.ASCIIPuerta;
+import ascii.ASCIIGeneral;
 
 public class PuertaSalida {
     
     // Atrubtos
     Jugador jugador;
-    ASCIICajero interfaz;
+    ASCIIPuerta interfaz;
 
     // Constructor
     public PuertaSalida(Jugador jugador){
         Scanner input = new Scanner (System.in);
         this.jugador = jugador;
-        interfaz = new ASCIICajero(jugador);
+        interfaz = new ASCIIPuerta(jugador);
         inicarPuerta(input);  
     }
 
     // Metodos
-    public void inicarPuerta(Scanner inpout){
+    public void inicarPuerta(Scanner input){
         
         // Guardar Partida
         // Cargar Partida
         // Salir
+        int opcion = 0;
+        while (opcion != 4) {
+            ASCIIGeneral.limpiarPantalla();
+            interfaz.titulo();
+            interfaz.opcioes();
+            try {
+                opcion = input.nextInt();
+                input.nextLine(); 
+                
+                // Opciones del menú principal
+                switch (opcion) {
+                    case 1:
+                        guardarPartida();
+                        ASCIIGeneral.esperarTecla();
+                        break;
+                    case 2:
+                        cargarPartida();
+                        ASCIIGeneral.esperarTecla();
+                        break;
+                    case 3:
+                        salir();
+                        break;
+                    case 4:
+                        System.err.println("Volviendo al casino");
+                        ASCIIGeneral.limpiarPantalla();
+                        break;
+                    default:
+                        System.out.println("Opción no válida.");
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Entrada no válida. Intenta de nuevo.");
+                // Limpiar Buffer
+                input.nextLine(); 
+            }
+        }
     }
 
     public void salir(){
@@ -35,7 +74,7 @@ public class PuertaSalida {
     }
 
     public void guardarPartida() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("saves/" + jugador.getNombre() +".dat"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("saves/" + jugador.getName() +".dat"))) {
             oos.writeObject(jugador);
             System.out.println("Partida guardada exitosamente.");
         } catch (IOException e) {

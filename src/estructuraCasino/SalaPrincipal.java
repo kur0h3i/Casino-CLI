@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 // Suponiendo que estos imports y clases existen
 import accionesCasino.Mesa;
+import accionesCasino.PuertaSalida;
 import excep.ExcepcionJugadorSinDinero;
 import excep.ExcepcionJugadorSinFichas;
 import juegos.Ruleta;
@@ -141,6 +142,9 @@ public class SalaPrincipal {
                         }
                         if (posX == 2 && posY == 7){
                             new Cajero(jugador);
+                        }
+                        if (posX == 4 && posY == 0){
+                            new PuertaSalida(jugador);
                         }
                         break;
                     default:
