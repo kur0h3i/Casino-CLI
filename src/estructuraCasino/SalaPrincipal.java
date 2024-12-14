@@ -10,6 +10,7 @@ import accionesCasino.PuertaSalida;
 import excep.ExcepcionJugadorSinDinero;
 import excep.ExcepcionJugadorSinFichas;
 import juegos.Bingo;
+import juegos.Dados;
 import juegos.Ruleta;
 import juegos.Slot;
 import personas.Jugador;
@@ -35,6 +36,9 @@ public class SalaPrincipal {
         mesas.add(new Mesa(new Ruleta(jugador), "Ruleta", 1, new int[][]{{9, 4}})); 
         mesas.add(new Mesa(new Bingo(jugador), "Bingo", 1, new int[][]{{14, 11}}));
         mesas.add(new Mesa(new Slot(jugador), "Slot", 1, new int[][]{{25, 11}}));
+        mesas.add(new Mesa(new Dados(jugador), "Dados", 1, new int[][]{{23, 4}}));
+
+
         boolean running = true;
         while (running) {
             ASCIIGeneral.limpiarPantalla();
