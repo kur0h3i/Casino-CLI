@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// Suponiendo que estos imports y clases existen
+
 import accionesCasino.Mesa;
 import accionesCasino.PuertaSalida;
 import excep.ExcepcionJugadorSinDinero;
 import excep.ExcepcionJugadorSinFichas;
+import juegos.Bingo;
 import juegos.Ruleta;
 import personas.Jugador;
 import ascii.ASCIIGeneral;
@@ -31,7 +32,7 @@ public class SalaPrincipal {
         // Mesas disponibles (agregar las mesas a la lista)
         ArrayList<Mesa> mesas = new ArrayList<>();
         mesas.add(new Mesa(new Ruleta(jugador), "Ruleta", 1, new int[][]{{9, 4}})); 
-        mesas.add(new Mesa(new Ruleta(jugador), "Poker", 1, new int[][]{{11, 3}}));
+        mesas.add(new Mesa(new Bingo(jugador), "Bingo", 1, new int[][]{{14, 11}}));
 
         boolean running = true;
         while (running) {

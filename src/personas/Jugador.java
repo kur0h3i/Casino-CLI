@@ -21,7 +21,6 @@ public class Jugador implements Serializable{
 
     // Metodos
 
-
     // Setters
     public void setNombre( String nombre){
         this.nombre = nombre;
