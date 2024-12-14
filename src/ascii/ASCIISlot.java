@@ -24,15 +24,13 @@ public class ASCIISlot {
 
     // Mostrar una cheatsheet con combinaciones y premios
     public void cheetsheet() {
-        System.out.println("=========================================");
-        System.out.println("           TABLA DE PREMIOS SLOT          ");
-        System.out.println("=========================================");
-        System.out.println(" X X X - Jackpot! x10 tu apuesta");
-        System.out.println(" ! ! ! - Mega premio! x7 tu apuesta");
-        System.out.println(" ? ? ? - Buen premio! x5 tu apuesta");
-        System.out.println(" * * * - Premio base! x3 tu apuesta");
-        System.out.println(" Dos símbolos iguales - Recuperas tu apuesta");
-        System.out.println("=========================================");
+        System.out.println("_____________  CHEET SHEET _____________");
+        System.out.println("| X X X --> Jackpot! x10 tu apuesta    |");
+        System.out.println("| ! ! ! --> Mega premio! x7 tu apuesta |");
+        System.out.println("| ? ? ? --> Buen premio! x5 tu apuesta |");
+        System.out.println("| * * * --> Premio base! x3 tu apuesta |");
+        System.out.println("| Dos símbolos iguales --> Recuperar   |");
+        System.out.println("|______________________________________|");
     }
 
     public void opcioes(){
@@ -44,10 +42,10 @@ public class ASCIISlot {
 
     // Mostrar resultados de los rodillos
     public void mostrarResultados(String simbolo1, String simbolo2, String simbolo3) {
-        System.out.println("=========================================");
-        System.out.println("           RESULTADOS SLOT               ");
-        System.out.println("=========================================");
-        System.out.println("           " + simbolo1 + " | " + simbolo2 + " | " + simbolo3);
-        System.out.println("=========================================");
+        System.out.println("_____________");
+        System.out.println("|    SLOT   |");
+        System.out.println("|___________|");
+        System.out.println("| " + simbolo1 + " | " + simbolo2 + " | " + simbolo3 + " |");
+        System.out.println("|___________|");
     }
 }
