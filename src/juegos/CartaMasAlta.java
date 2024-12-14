@@ -1,6 +1,7 @@
 // CartaMasAlta.java
 package juegos;
 
+import ascii.ASCIIGeneral;
 import ascii.ASCIICartaMasAlta;
 import java.util.Scanner;
 import recursos.Baraja;
@@ -19,18 +20,19 @@ public class CartaMasAlta extends Juego {
         super(jugador);
         this.jugador = jugador;
         this.baraja = new Baraja();
-        this.interfaz = new ASCIICartaMasAlta();
+        this.interfaz = new ASCIICartaMasAlta(jugador);
     }
 
     @Override
     public void iniciarPartida() throws ExcepcionJugadorSinFichas {
         Scanner input = new Scanner(System.in);
 
-        interfaz.titulo();
         comprobarfichas();
 
         boolean continuar = true;
         while (continuar) {
+            ASCIIGeneral.limpiarPantalla();
+            interfaz.titulo();
             interfaz.opciones();
 
             try {
@@ -39,14 +41,21 @@ public class CartaMasAlta extends Juego {
 
                 switch (opcion) {
                     case 1:
+                        ASCIIGeneral.limpiarPantalla();
+                        interfaz.titulo();
                         realizarApuesta(input);
+                        ASCIIGeneral.esperarTecla();
                         break;
                     case 2:
+                        ASCIIGeneral.limpiarPantalla();
+                        interfaz.titulo();
                         interfaz.cheatsheet();
+                        ASCIIGeneral.esperarTecla();
                         break;
                     case 3:
                         continuar = false;
                         System.out.println("Gracias por jugar a La Carta Más Alta. ¡Hasta la próxima!");
+                        ASCIIGeneral.esperarTecla();
                         break;
                     default:
                         System.out.println("Opción no válida. Intenta de nuevo.");
