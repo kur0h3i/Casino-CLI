@@ -1,5 +1,5 @@
 package accionesCasino;
 
-public class puertaSalida {
+public class PuertaSalida {
     
 }
