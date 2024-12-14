@@ -126,6 +126,7 @@ public class Bingo extends Juego {
     
             numerosDisponibles.remove(numero);
             ASCIIGeneral.limpiarPantalla();
+            interfaz.titulo();
             System.out.println("Número extraído: " + numero);
     
             tacharNumero(cartones[0], numero);

@@ -10,8 +10,16 @@ public class ASCIIRuleta {
         this.jugador = jugador;
     }
 
+    public void titulo(){
+        System.out.println("____        _      _        ");
+        System.out.println("|  _ \\ _   _| | ___| |_ __ _ ");
+        System.out.println("| |_) | | | | |/ _ \\ __/ _` |");
+        System.out.println("|  _ <| |_| | |  __/ || (_| |");
+        System.out.println("|_| \\_\\\\__,_|_|\\___|\\__\\__,_|");
+
+    }
+
     public void interfazRuleta() {
-        jugador.datosUsuarioEnPartida();
         System.out.println("_________________________________________________________________________");
         System.out.println("|     | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 | 27 | 30 | 33 | 36 | 2 to 1 |");
         System.out.println("|     |-----------------------------------------------------------------|");
@@ -38,7 +46,7 @@ public class ASCIIRuleta {
     }
 
     public void interfazPartida(){
-        jugador.datosUsuarioEnPartida();
+            jugador.datosUsuarioEnPartida();
             System.out.println("_______________________");
             System.out.println("| Opciones de Apuesta   |");
             System.out.println("| 1. Color (Rojo/Negro) |");
@@ -49,4 +57,13 @@ public class ASCIIRuleta {
             System.out.println("| 6. Salir              |");
             System.out.println("|_______________________|");
     }
+
+    public void opciones(){
+        jugador.datosUsuarioEnPartida();
+        System.out.println("1. Realizar Apuesta");
+        System.out.println("2. Girar Ruleta");
+        System.out.println("3. CheetSheet");
+        System.out.println("4. Salir");
+    }
+    
 }

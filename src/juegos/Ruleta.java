@@ -41,14 +41,9 @@ public class Ruleta extends Juego {
         while (opcion != 4) {
             // Monstrar Interfaz
             ASCIIGeneral.limpiarPantalla();
+            interfaz.titulo();
             interfaz.interfazRuleta();
-
-            // Mostrar Opciones
-            System.out.println("Elige una opción:");
-            System.out.println("1. Apostar por una opción y girar");
-            System.out.println("2. Girar (sin apostar)");
-            System.out.println("3. Ver Cheetsheet");
-            System.out.println("4. Salir");
+            interfaz.opciones();
 
             try {
                 opcion = input.nextInt();
@@ -60,15 +55,20 @@ public class Ruleta extends Juego {
                         if (!definirApuesta(input)) {
                             break;
                         }
+                        ASCIIGeneral.limpiarPantalla();
+                        interfaz.titulo();
                         opcionesDeApuesta(input);
                         ASCIIGeneral.esperarTecla();
                         break;
                     case 2:
-                        System.out.println("Girar la ruleta (sin apostar).");
+                        ASCIIGeneral.limpiarPantalla();
+                        interfaz.titulo();
                         tirarRuleta();
                         ASCIIGeneral.esperarTecla();
                         break;
                     case 3:
+                        ASCIIGeneral.limpiarPantalla();
+                        interfaz.titulo();
                         interfaz.cheetsheet();
                         ASCIIGeneral.esperarTecla();
                         break;
