@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "blackjack.Main",
+            "projectName": "ProyectoCasinoJava_2c2cf91e"
+        },
+        {
+            "type": "java",
             "name": "MainCasino",
             "request": "launch",
             "mainClass": "MainCasino",
