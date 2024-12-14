@@ -79,7 +79,7 @@ public class Jugador {
                 + this.edad
                 + "\nDinero : "
                 + this.dinero
-                + "\nFichas"
+                + "\nFichas : "
                 + this.fichas;
     }
 }
