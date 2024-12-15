@@ -6,10 +6,12 @@ import java.awt.event.ActionListener;
 
 public class BlackJackUI extends JFrame {
 
+    // Atributos
     private Baraja baraja;
     private Jugador jugador;
     private Jugador crupier;
 
+    // Atributos JFrame
     private JPanel jugadorPanel;
     private JPanel crupierPanel;
     private JButton pedirCartaButton;
@@ -76,7 +78,7 @@ public class BlackJackUI extends JFrame {
 
         actualizarPantalla();
     }
-
+    
     private void iniciarJuego() {
         jugador.recibirCarta(baraja.repartir());
         jugador.recibirCarta(baraja.repartir());
