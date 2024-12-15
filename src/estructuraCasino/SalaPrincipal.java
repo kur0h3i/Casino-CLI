@@ -133,9 +133,10 @@ public class SalaPrincipal {
         boolean validInput = false;
         
         while (!validInput) {
+            
             try {
                 String input = scanner.nextLine().toLowerCase();
-
+                validInput = true;
                 switch (input) {
                     case "w":
                         moverJugador(0, -1);

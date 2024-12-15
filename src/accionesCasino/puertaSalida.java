@@ -1,3 +1,4 @@
+// PuertaSalida.java
 package accionesCasino;
 
 // IO
@@ -20,22 +21,21 @@ import ascii.ASCIIPuerta;
 import ascii.ASCIIGeneral;
 
 public class PuertaSalida {
-    
-    // Atrubtos
+
+    // Atributos
     Jugador jugador;
     ASCIIPuerta interfaz;
 
     // Constructor
-    public PuertaSalida(Jugador jugador){
-        Scanner input = new Scanner (System.in);
+    public PuertaSalida(Jugador jugador) {
+        Scanner input = new Scanner(System.in);
         this.jugador = jugador;
         interfaz = new ASCIIPuerta(jugador);
-        inicarPuerta(input);  
+        iniciarPuerta(input);
     }
 
-    // Metodos
-    public void inicarPuerta(Scanner input){
-        
+    // Métodos
+    public void iniciarPuerta(Scanner input) {
         int opcion = 0;
         while (opcion != 4) {
             ASCIIGeneral.limpiarPantalla();
@@ -43,8 +43,8 @@ public class PuertaSalida {
             interfaz.opcioes();
             try {
                 opcion = input.nextInt();
-                input.nextLine(); 
-                
+                input.nextLine();
+
                 switch (opcion) {
                     case 1:
                         guardarPartida();
@@ -64,24 +64,27 @@ public class PuertaSalida {
                     default:
                         System.out.println("Opción no válida.");
                 }
-            }
-            catch (InputMismatchException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Entrada no válida. Intenta de nuevo.");
-                // Limpiar Buffer
-                input.nextLine(); 
+                input.nextLine();
             }
         }
     }
 
-    // Salir
-    public void salir(){
+    public void salir() {
         System.out.println("Saliendo del casino");
         System.exit(0);
     }
 
-    // Guardar Partida en la carpeta saves/
     public void guardarPartida() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("saves/" + jugador.getName() +".dat"))) {
+        // Confirmar que la carpeta 'saves/' existe
+        File directorio = new File("saves/");
+        if (!directorio.exists()) {
+            directorio.mkdirs();
+        }
+
+        // Guardar el objeto jugador
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("saves/" + jugador.getName() + ".dat"))) {
             oos.writeObject(jugador);
             System.out.println("Partida guardada exitosamente.");
         } catch (IOException e) {
@@ -89,26 +92,26 @@ public class PuertaSalida {
         }
     }
 
-    // Cargar Partida
     public void cargarPartida() {
         Scanner input = new Scanner(System.in);
         System.out.println("Nombre del jugador que quieres cargar: ");
         String nombreJugador = input.nextLine();
 
-        // Archivo que se espera cargar
         File archivo = new File("saves/" + nombreJugador + ".dat");
 
         try {
-            // Validar si el archivo existe
             if (!archivo.exists()) {
                 throw new ExcepcionJugadorNoEncontrado("El jugador con nombre '" + nombreJugador + "' no existe.");
             }
 
-            // Intentar leer el archivo y deserializar
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
-                jugador = (Jugador) ois.readObject();
-                System.out.println("Partida cargada exitosamente: ");
-                System.out.println(jugador);
+                Jugador jugadorCargado = (Jugador) ois.readObject();
+                System.out.println("Partida cargada exitosamente:");
+                System.out.println(jugadorCargado);
+
+                // Actualizar la referencia global del jugador
+                this.jugador.actualizarDesde(jugadorCargado);
+
             }
         } catch (ExcepcionJugadorNoEncontrado e) {
             System.out.println(e.getMessage());
@@ -119,5 +122,3 @@ public class PuertaSalida {
         }
     }
 }
-
-

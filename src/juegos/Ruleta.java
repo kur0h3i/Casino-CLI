@@ -130,7 +130,7 @@ public class Ruleta extends Juego {
                     default:
                         System.out.println("Opción no válida. Intenta de nuevo.");
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Entrada no válida. Intenta de nuevo.");
                 input.nextLine();
             }
@@ -161,7 +161,6 @@ public class Ruleta extends Juego {
             jugador.agregarFichas(apuesta * 2); // Ganancia: la apuesta inicial más el premio
         } else {
             System.out.println("Lo siento, perdiste.");
-            jugador.restarFichas(apuesta);
         }
     }
     
@@ -178,7 +177,6 @@ public class Ruleta extends Juego {
             jugador.agregarFichas(apuesta * 2);
         } else {
             System.out.println("Lo siento, perdiste.");
-            jugador.restarFichas(apuesta);
         }
     }
     
@@ -199,7 +197,6 @@ public class Ruleta extends Juego {
             jugador.agregarFichas(apuesta * 36);
         } else {
             System.out.println("Lo siento, perdiste.");
-            jugador.restarFichas(apuesta);
         }
     }
 
@@ -223,7 +220,6 @@ public class Ruleta extends Juego {
             jugador.agregarFichas(apuesta * 3); // Ganancia: apuesta inicial más premio
         } else {
             System.out.println("Lo siento, perdiste.");
-            jugador.restarFichas(apuesta);
         }
     }
     
@@ -247,7 +243,6 @@ public class Ruleta extends Juego {
             jugador.agregarFichas(apuesta * 2); // Ganancia: apuesta inicial más premio
         } else {
             System.out.println("Lo siento, perdiste.");
-            jugador.restarFichas(apuesta);
         }
     }
 }

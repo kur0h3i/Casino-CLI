@@ -75,6 +75,14 @@ public class Jugador implements Serializable{
         System.out.println("----------------------------");
     }
 
+    public void actualizarDesde(Jugador jugadorCargado) {
+        this.nombre = jugadorCargado.getName();
+        this.edad = jugadorCargado.getEdad();
+        this.dinero = jugadorCargado.getDinero();
+        this.fichas = jugadorCargado.getFichas();
+        
+    }
+
     // to String
     @Override
     public String toString(){

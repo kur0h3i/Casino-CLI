@@ -5,6 +5,7 @@ package juegos;
 import ascii.ASCIIGeneral;
 import ascii.ASCIISlot;
 
+import java.util.InputMismatchException;
 // Util
 import java.util.Random;
 import java.util.Scanner;
@@ -66,7 +67,7 @@ public class Slot extends Juego {
                     default:
                         System.out.println("Opción no válida. Intenta de nuevo.");
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida. Intenta de nuevo.");
                 input.nextLine();
             }
