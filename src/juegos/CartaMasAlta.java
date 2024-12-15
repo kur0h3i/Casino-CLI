@@ -2,6 +2,7 @@
 package juegos;
 
 import ascii.ASCIIGeneral;
+import ascii.ASCIIBingo;
 import ascii.ASCIICartaMasAlta;
 import java.util.Scanner;
 import recursos.Baraja;
@@ -27,6 +28,7 @@ public class CartaMasAlta extends Juego {
     public void iniciarPartida() throws ExcepcionJugadorSinFichas {
         Scanner input = new Scanner(System.in);
 
+        
         comprobarfichas();
 
         boolean continuar = true;
@@ -55,7 +57,6 @@ public class CartaMasAlta extends Juego {
                     case 3:
                         continuar = false;
                         System.out.println("Gracias por jugar a La Carta Más Alta. ¡Hasta la próxima!");
-                        ASCIIGeneral.esperarTecla();
                         break;
                     default:
                         System.out.println("Opción no válida. Intenta de nuevo.");

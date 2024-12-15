@@ -38,6 +38,21 @@ public class Carta {
     }
   }
   
+  private int getPrioridadPalo() {
+    switch (tipo) {
+      case "S": // PICAS
+        return 4;
+      case "H": // TREBOLES
+        return 3;
+      case "D": // DIAMANTES
+        return 2;
+      case "C": // CORZAZONES
+        return 1;
+      default:
+        return 0;
+    }
+  }
+
   public String getNombreArchivo() {
     // Convierte el valor y tipo a un nombre de archivo, como "A_corazones.png"
     return valor + "-" + tipo + ".png";
