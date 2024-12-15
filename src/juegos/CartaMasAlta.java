@@ -1,22 +1,33 @@
 // CartaMasAlta.java
 package juegos;
 
+// ASCII
 import ascii.ASCIIGeneral;
-import ascii.ASCIIBingo;
 import ascii.ASCIICartaMasAlta;
+
+import java.util.InputMismatchException;
+// Util
 import java.util.Scanner;
+
+// Recursos
 import recursos.Baraja;
 import recursos.Carta;
+
+// Jugador
 import personas.Jugador;
+
+// Excepcion
 import excep.ExcepcionJugadorSinFichas;
 
 public class CartaMasAlta extends Juego {
 
+    // Atributos
     private Baraja baraja;
     private ASCIICartaMasAlta interfaz;
     Jugador jugador;
     private int apuesta;
 
+    // Constructor
     public CartaMasAlta(Jugador jugador) {
         super(jugador);
         this.jugador = jugador;
@@ -28,7 +39,6 @@ public class CartaMasAlta extends Juego {
     public void iniciarPartida() throws ExcepcionJugadorSinFichas {
         Scanner input = new Scanner(System.in);
 
-        
         comprobarfichas();
 
         boolean continuar = true;
@@ -39,13 +49,14 @@ public class CartaMasAlta extends Juego {
 
             try {
                 int opcion = input.nextInt();
-                input.nextLine(); // Limpiar buffer
+                input.nextLine(); 
 
                 switch (opcion) {
                     case 1:
                         ASCIIGeneral.limpiarPantalla();
                         interfaz.titulo();
-                        realizarApuesta(input);
+                        apuesta = definirApuesta(input);
+                        jugarRonda(apuesta);
                         ASCIIGeneral.esperarTecla();
                         break;
                     case 2:
@@ -56,40 +67,20 @@ public class CartaMasAlta extends Juego {
                         break;
                     case 3:
                         continuar = false;
-                        System.out.println("Gracias por jugar a La Carta Más Alta. ¡Hasta la próxima!");
+                        System.out.println("Saliendo ...");
                         break;
                     default:
                         System.out.println("Opción no válida. Intenta de nuevo.");
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida. Intenta de nuevo.");
                 input.nextLine();
             }
         }
     }
 
-    private void realizarApuesta(Scanner input) {
-        System.out.println("¿Cuántas fichas deseas apostar?");
-        System.out.println("Tienes " + jugador.getFichas() + " fichas disponibles.");
-
-        try {
-            apuesta = input.nextInt();
-            input.nextLine(); // Limpiar buffer
-
-            if (apuesta <= 0 || apuesta > jugador.getFichas()) {
-                System.out.println("Apuesta no válida. Intenta de nuevo.");
-                return;
-            }
-
-            jugador.restarFichas(apuesta);
-            jugarRonda();
-        } catch (Exception e) {
-            System.out.println("Entrada inválida. Intenta de nuevo.");
-            input.nextLine();
-        }
-    }
-
-    private void jugarRonda() {
+    // Jugar ronda
+    private void jugarRonda(int apuesta) {
         baraja.mezclar();
 
         Carta cartaJugador = baraja.repartir();
@@ -108,7 +99,7 @@ public class CartaMasAlta extends Juego {
             System.out.println("La IA gana esta ronda con " + cartaIA + ".");
         } else {
             System.out.println("¡Empate! Ambas cartas son iguales.");
-            jugador.agregarFichas(apuesta); // Recupera la apuesta en caso de empate
+            jugador.agregarFichas(apuesta); 
         }
     }
 }

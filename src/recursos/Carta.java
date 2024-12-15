@@ -38,6 +38,7 @@ public class Carta {
     }
   }
   
+  // Prioridad de los palos segun mi criterio
   private int getPrioridadPalo() {
     switch (tipo) {
       case "S": // PICAS
@@ -53,6 +54,7 @@ public class Carta {
     }
   }
 
+  // Metodoo que se usaba en la version del BalckJack con UI
   public String getNombreArchivo() {
     // Convierte el valor y tipo a un nombre de archivo, como "A_corazones.png"
     return valor + "-" + tipo + ".png";

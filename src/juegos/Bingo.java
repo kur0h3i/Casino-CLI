@@ -1,13 +1,21 @@
 // Bingo.java
 package juegos;
 
+// ASCII
 import ascii.ASCIIGeneral;
+import ascii.ASCIIBingo;
+
+// Util
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
+
+// Excepciones
 import excep.ExcepcionJugadorSinFichas;
+
+// Jugador
 import personas.Jugador;
-import ascii.ASCIIBingo;
+
 
 public class Bingo extends Juego {
 
@@ -15,6 +23,7 @@ public class Bingo extends Juego {
     private final int FILAS = 4;
     private final int COLUMNAS = 6;
     private String[][][] cartones;
+    // Usar HashSet para no tener numeros repetidos 
     private HashSet<Integer> numerosDisponibles;
     private Jugador[] jugadores;
     private int bote;
@@ -39,11 +48,11 @@ public class Bingo extends Juego {
         interfaz.titulo();
 
         System.out.println("Bienvenido al Bingo!");
-        System.out.print("¿Cuántos jugadores participarán? (Incluyéndote): ");
+        System.out.print("¿Cuántos jugadores participarán? : ");
         int numJugadores = input.nextInt();
         input.nextLine();
 
-        System.out.print("¿Cuántas fichas deseas apostar? (Cada jugador aportará la misma cantidad): ");
+        System.out.print("¿Cuántas fichas deseas apostar? : ");
         apuesta = input.nextInt();
         input.nextLine();
 
@@ -97,7 +106,8 @@ public class Bingo extends Juego {
 
         ASCIIGeneral.limpiarPantalla();
         System.out.println("Tu cartón:");
-        imprimirCarton(cartones[0]); // Solo muestra el cartón del jugador principal
+        // Carton del jugador Principal
+        imprimirCarton(cartones[0]); 
     }
 
     // Mostrar el carton
@@ -118,10 +128,10 @@ public class Bingo extends Juego {
     
         while (true) {
             long startTime = System.currentTimeMillis(); // Tiempo de inicio de la iteración
-    
+            
             if (numerosDisponibles.isEmpty()) {
                 for (int i = 1; i <= 75; i++) {
-                    numerosDisponibles.add(i); // Rellenar si están vacíos
+                    numerosDisponibles.add(i); 
                 }
             }
     
@@ -157,10 +167,9 @@ public class Bingo extends Juego {
                 }
             }
     
-            // Calcular el tiempo total de la iteración
             long elapsedTime = System.currentTimeMillis() - startTime;
     
-            // Ajustar la pausa para mantener un intervalo constante de 2 segundos
+            // Intervalo de 1 Segundo
             long sleepTime = 1000 - elapsedTime;
             if (sleepTime > 0) {
                 try {
@@ -172,7 +181,7 @@ public class Bingo extends Juego {
         }
     }
     
-    
+    // Tacha un numero en el carton
     private void tacharNumero(String[][] carton, int numero) {
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
@@ -183,6 +192,7 @@ public class Bingo extends Juego {
         }
     }
 
+    // Comprueba si es bingo
     private boolean esBingo(String[][] carton) {
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {

@@ -1,14 +1,19 @@
+// Cajero.java
 package accionesCasino;
 
-
-import ascii.ASCIIGeneral;
+// Excepciones
 import excep.ExcepcionJugadorSinDinero;
 import excep.ExcepcionJugadorSinFichas;
 
+// Util
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+// ASCII
 import ascii.ASCIICajero;
+import ascii.ASCIIGeneral;
+
+// Jugador
 import personas.Jugador;
 
 
@@ -26,6 +31,8 @@ public class Cajero {
         iniciarCajero(input);    
     }
 
+    // Metodos
+    // Iniciar Cajero
     public void iniciarCajero(Scanner input){
         
         int opcion = 0;
@@ -73,14 +80,14 @@ public class Cajero {
         }
     }
 
-    
-
+    // Comprobar Fichas con excepcion
     public void comprobarfichas() throws ExcepcionJugadorSinFichas{
         if (jugador.getFichas() <= 0) {
             throw new ExcepcionJugadorSinFichas("Jugador sin fichas");
         }
     }
 
+    // Comprobar Dinero con excepcion
     public void comprobarDinero() throws ExcepcionJugadorSinDinero{
         if (jugador.getDinero() <= 0){
             throw new ExcepcionJugadorSinDinero("Jugador sin dinero");
@@ -88,6 +95,7 @@ public class Cajero {
 
     }
 
+    // Fichas ---> Dinero
     public void fichasDinero(int valor) throws ExcepcionJugadorSinFichas {
         comprobarfichas();
         System.out.println("Cambiando " + valor + " fichas por dinero...");
@@ -95,6 +103,7 @@ public class Cajero {
         jugador.agregarDinero(valor);
     }
 
+    // Dinero ---> Fichas
     public void dineroFichas(int valor) throws ExcepcionJugadorSinDinero {
         comprobarDinero();
         System.out.println("Cambiando " + valor + " dinero por fichas...");
@@ -102,6 +111,7 @@ public class Cajero {
         jugador.agregarFichas(valor);
     }
 
+    // Definir Valor
     public int definirValor(Scanner input) {
         int valor = -1;
         while (valor <= 0) { // Asegurar que el valor sea mayor que cero

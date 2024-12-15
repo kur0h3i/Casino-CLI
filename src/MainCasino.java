@@ -1,8 +1,10 @@
-
-
+// IO
 import java.io.IOException;
 
+// Estructura Casino
 import estructuraCasino.*;
+
+// Excepcion
 import excep.ExcepcionJugadorMenorEdad;
 import excep.ExcepcionJugadorSinDinero;
 import excep.ExcepcionJugadorSinFichas;

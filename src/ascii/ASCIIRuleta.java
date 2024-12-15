@@ -1,15 +1,20 @@
+//ASCUIRuleta
 package ascii;
 
+//Jugador
 import personas.Jugador;
 
 public class ASCIIRuleta {
-
+    
+    // Atributos
     Jugador jugador;
 
+    // Metodos
     public ASCIIRuleta (Jugador jugador){
         this.jugador = jugador;
     }
 
+    // Titulo de la Ruleta
     public void titulo(){
         System.out.println("____        _      _        ");
         System.out.println("|  _ \\ _   _| | ___| |_ __ _ ");
@@ -19,6 +24,7 @@ public class ASCIIRuleta {
 
     }
 
+    // Mesa de la Ruleta
     public void interfazRuleta() {
         System.out.println("_________________________________________________________________________");
         System.out.println("|     | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 | 27 | 30 | 33 | 36 | 2 to 1 |");
@@ -33,6 +39,7 @@ public class ASCIIRuleta {
         System.out.println("|_____|_________________________________________________________________|");
     }
 
+    // CheetSheet de la Ruleta
     public void cheetsheet() {
         System.out.println("__________________________ CHEET SHEET __________________________");
         System.out.println("| Tipo de Apuesta         | Ejemplo        | Pago               |");
@@ -45,6 +52,7 @@ public class ASCIIRuleta {
         System.out.println("|_______________________________________________________________|");
     }
 
+    // Opciones de la apuesta de la Ruleta
     public void interfazPartida(){
             jugador.datosUsuarioEnPartida();
             System.out.println("_______________________");
@@ -58,6 +66,7 @@ public class ASCIIRuleta {
             System.out.println("|_______________________|");
     }
 
+    // Opciones de la Ruleta
     public void opciones(){
         jugador.datosUsuarioEnPartida();
         System.out.println("1. Realizar Apuesta");

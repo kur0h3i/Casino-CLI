@@ -1,12 +1,19 @@
+
+// Mesa.java
 package accionesCasino;
 
+// Excepciones
 import excep.ExcepcionJugadorSinFichas;
+
+//Jugador
 import juegos.Juego;
+
+// ASCII
 import ascii.ASCIIGeneral;
 
 public class Mesa {
     
-    // Atributos de la mesa
+    // Atributos 
     Juego juego;
     String nombreMesa;
     int numPartcipantes;
@@ -36,11 +43,11 @@ public class Mesa {
         return posicionInteractuar;
     }
 
+    // Jugar
     public void jugar() throws ExcepcionJugadorSinFichas{
         try {
-            juego.iniciarPartida(); // Intenta iniciar la partida
+            juego.iniciarPartida(); 
         } catch (ExcepcionJugadorSinFichas e) {
-            // Captura la excepción y muestra un mensaje sin salir del programa
             System.out.println("No puedes jugar porque no tienes fichas.");
             ASCIIGeneral.esperarTecla();
         }

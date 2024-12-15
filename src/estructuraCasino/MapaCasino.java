@@ -1,3 +1,5 @@
+//MapaCasino.java
+
 package estructuraCasino;
 
 public class MapaCasino {

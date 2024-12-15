@@ -1,12 +1,13 @@
+// Jugador.java
 package personas;
 
+// IO
 import java.io.Serializable;
 
 public class Jugador implements Serializable{
     
-    private static final long serialVersionUID = 1L;
-
     // Atributos
+    private static final long serialVersionUID = 1L;
     String nombre;
     int edad;
     double dinero;
@@ -66,6 +67,7 @@ public class Jugador implements Serializable{
         this.dinero -= dinero;
     }
 
+    // Mostrar Datos de usuario 
     public void datosUsuarioEnPartida(){
         System.out.println("----------------------------");
         System.out.println("Nombre :  " + this.getName());

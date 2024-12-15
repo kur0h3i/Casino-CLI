@@ -1,5 +1,8 @@
+// ASCIICajero.java
+
 package ascii;
 
+// Jugador
 import personas.Jugador;
 
 public class ASCIICajero {
@@ -13,6 +16,7 @@ public class ASCIICajero {
     }
 
     // Metodos
+    // Titulo del cajero
     public void titulo(){
         System.out.println("  ____       _                ");
         System.out.println(" / ___|__ _ (_) ___ _ __ ___  ");
@@ -22,6 +26,7 @@ public class ASCIICajero {
         System.out.println("          |__/                ");
     }
 
+    // Opciones del cajero
     public void opcioes(){
         System.out.println("------------------------------");
         System.out.println(jugador);

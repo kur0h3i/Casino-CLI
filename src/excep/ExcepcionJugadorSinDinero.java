@@ -1,3 +1,5 @@
+// ExcepcionJugadorSinDinero.java
+
 package excep;
 
 public class ExcepcionJugadorSinDinero extends Exception{

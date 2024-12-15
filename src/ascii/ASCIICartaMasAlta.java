@@ -1,5 +1,8 @@
+// ASCIICartaMasAlta.java
+
 package ascii;
 
+// Jugador
 import personas.Jugador;
 
 public class ASCIICartaMasAlta {
@@ -12,7 +15,7 @@ public class ASCIICartaMasAlta {
         this.jugador = jugador;
     }
 
-    
+    // Titulo de la Carta Mas Alta
     public void titulo() {
         System.err.println("  ____           _           _    _ _        ");
         System.err.println(" / ___|__ _ _ __| |_ __ _   / \\  | | |_ __ _ ");
@@ -21,7 +24,7 @@ public class ASCIICartaMasAlta {
         System.err.println(" \\____\\__,_|_|   \\__\\__,_/_/   \\_\\_|\\__\\__,_|");
     }
 
-    
+    // CheetSheet de la Carta Mas Alta
     public void cheatsheet() {
         System.out.println("____________________________ CHEATSHEET _____________________________");
         System.out.println("| Resultado                  | Pago                                 |");
@@ -32,7 +35,7 @@ public class ASCIICartaMasAlta {
         System.out.println("|___________________________________________________________________|");
     }
 
-    
+    // Opciones de la Carta Mas Alta
     public void opciones() {
         jugador.datosUsuarioEnPartida();
         System.out.println("1. Apostar y jugar");

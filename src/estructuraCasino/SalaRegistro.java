@@ -1,3 +1,4 @@
+// Salaregisttro
 package estructuraCasino;
 
 import java.util.Scanner;
@@ -21,9 +22,7 @@ public class SalaRegistro {
         
         // Verificar si es mayor de edad
         try { 
-
             mayorEdad();
-
         } catch (ExcepcionJugadorMenorEdad e) {
             // Manejar la excepción y terminar el registro
             System.out.println(e.getMessage());
@@ -47,7 +46,7 @@ public class SalaRegistro {
     // Información sobre el Casino
     public void informacionCasino() {
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Bienvenidos a Casino Royale, un emocionante juego de casino donde tu objetivo es convertir una pequeña cantidad de 200€ en 1000€ (en el modo normal) a través de una serie de apuestas en varios juegos clásicos de casino. Este desafiante reto pondrá a prueba tu habilidad para gestionar el dinero.");
+        System.out.println("Bienvenidos a Casino Royale, un emocionante juego de casino dodne tendras que usar tu mayor ingenio en el juego para poder hacer una gran cantidad de dinero.");
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 

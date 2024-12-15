@@ -1,19 +1,28 @@
 // Dados.java
 package juegos;
 
+// ASCII
 import ascii.ASCIIGeneral;
 import ascii.ASCIIDados;
+
+// Util
 import java.util.Random;
 import java.util.Scanner;
+
+// Excepcion
 import excep.ExcepcionJugadorSinFichas;
+
+// Jugador
 import personas.Jugador;
 
 public class Dados extends Juego {
 
+    // Atributos
     private int apuesta;
     private Jugador jugador;
     private ASCIIDados interfaz;
 
+    // Constructor
     public Dados(Jugador jugador) {
         super(jugador);
         this.jugador = jugador;
@@ -24,7 +33,6 @@ public class Dados extends Juego {
     public void iniciarPartida() throws ExcepcionJugadorSinFichas {
         Scanner input = new Scanner(System.in);
         
-
         comprobarfichas();
 
         boolean continuar = true;
@@ -39,7 +47,8 @@ public class Dados extends Juego {
 
                 switch (opcion) {
                     case 1:
-                        realizarApuesta(input);
+                        apuesta = definirApuesta(input);
+                        jugarDados(input);
                         ASCIIGeneral.esperarTecla();
                         break;
                     case 2:
@@ -60,27 +69,7 @@ public class Dados extends Juego {
         }
     }
 
-    private void realizarApuesta(Scanner input) {
-        System.out.println("¿Cuántas fichas deseas apostar?");
-        System.out.println("Tienes " + jugador.getFichas() + " fichas disponibles.");
-
-        try {
-            apuesta = input.nextInt();
-            input.nextLine(); // Limpiar buffer
-
-            if (apuesta <= 0 || apuesta > jugador.getFichas()) {
-                System.out.println("Apuesta no válida. Intenta de nuevo.");
-                return;
-            }
-
-            jugador.restarFichas(apuesta);
-            jugarDados(input);
-        } catch (Exception e) {
-            System.out.println("Entrada inválida. Intenta de nuevo.");
-            input.nextLine();
-        }
-    }
-
+    // Jugar a los dados
     private void jugarDados(Scanner input) {
         Random random = new Random();
         int resultado = tirarDados(random);
@@ -96,6 +85,7 @@ public class Dados extends Juego {
         }
     }
 
+    // Jugar el Punto
     private void jugarPunto(Scanner input, int punto, Random random) {
         System.out.println("Tira los dados nuevamente para intentar obtener tu Punto: " + punto + ".");
         System.out.println("Si sacas un 7 antes del Punto, pierdes.");
@@ -119,6 +109,7 @@ public class Dados extends Juego {
         }
     }
 
+    // Tirar los Dados
     private int tirarDados(Random random) {
         int dado1 = random.nextInt(6) + 1;
         int dado2 = random.nextInt(6) + 1;

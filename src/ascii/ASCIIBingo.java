@@ -1,7 +1,10 @@
+// ASCIBingo.java
+
 package ascii;
 
 public class ASCIIBingo {
 
+    // Titulo del bingo
     public void titulo(){
         System.out.println(" ____  _                   ");
         System.out.println("| __ )(_)_ __   __ _  ___  ");

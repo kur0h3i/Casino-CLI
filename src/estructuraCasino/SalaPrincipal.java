@@ -1,22 +1,34 @@
+// SalaPrincipal.java
+
 package estructuraCasino;
 
+// Util
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
+// Aciones Casino
 import accionesCasino.Mesa;
 import accionesCasino.PuertaSalida;
+import accionesCasino.Cajero;
+
+// Excepciones
 import excep.ExcepcionJugadorSinDinero;
 import excep.ExcepcionJugadorSinFichas;
+
+//Juegos
 import juegos.Bingo;
 import juegos.CartaMasAlta;
 import juegos.Dados;
 import juegos.Ruleta;
 import juegos.Slot;
+
+// Jugador
 import personas.Jugador;
+
+// ASCII
 import ascii.ASCIIGeneral;
-import accionesCasino.Cajero;
+
 
 public class SalaPrincipal {
 
@@ -53,7 +65,6 @@ public class SalaPrincipal {
         scanner.close();
     }
 
-    // Limpiar pantalla (función para terminal)
 
     public void interfazPrincipal(Jugador jugador, ArrayList<Mesa> mesas){
         // Interfaz del jugador
@@ -61,15 +72,13 @@ public class SalaPrincipal {
         System.out.println("Nombre :  " + jugador.getName());
         System.out.println("Dinero : " + jugador.getDinero());
         System.out.println("Fichas : " + jugador.getFichas());
-        System.out.println("POSX : " + posX);
-        System.out.println("POSY : " + posY);
         System.out.println("----------------------------");
 
         // Mostrar el mapa del casino
         mostrarMapa();
 
         // Instrucciones de control
-        System.out.println("Usa WASD para moverte, E para unirte a la mesa, Q para salir:");
+        System.out.println("Usa WASD para moverte, E para unirte a la mesa:");
 
         // Interacción con mesas
         for (Mesa mesa : mesas) {
@@ -79,12 +88,12 @@ public class SalaPrincipal {
         }
     }
 
-    // Mostrar mapa del casino
+    // Mostrar mapa del casino (Jugador P)
     public void mostrarMapa() {
         for (int i = 0; i < mapa.length; i++) {
             for (int j = 0; j < mapa[i].length; j++) {
                 if (i == posY && j == posX) {
-                    System.out.print("P ");  // Representar jugador con "P"
+                    System.out.print("P "); 
                 } else {
                     System.out.print(mapa[i][j] + " ");
                 }
@@ -106,27 +115,26 @@ public class SalaPrincipal {
         }
     }
 
+    // Puerta Salida Mostrar Indicaciones
     public void salirPuerta(){
-        // Puerta de salida
         if (posX == 4 && posY == 0) {
             System.out.println("Usa E para salir/guardar/cargar "); 
         }
     }
-
+    // Cajero Mostrar Indicaciones
     public void cajero(){
         if (posX == 2 && posY == 7){
             System.out.println("Usa E para entrar en el cajero");
         }
     }
 
+    // Manejo de la Terminal
     public void entradaTerminal(Scanner scanner, Jugador jugador, ArrayList<Mesa> mesas) throws ExcepcionJugadorSinFichas, ExcepcionJugadorSinDinero {
         boolean validInput = false;
         
         while (!validInput) {
             try {
-                // Leer entrada del teclado
                 String input = scanner.nextLine().toLowerCase();
-                validInput = true;  // Asumir entrada válida hasta comprobar
 
                 switch (input) {
                     case "w":
@@ -142,27 +150,29 @@ public class SalaPrincipal {
                         moverJugador(1, 0);
                         break;
                     case "e":
-                        // Verificar si estamos en la posición de la mesa y unirse
+                        // Comprobar si estamos en una Mesa
                         for (Mesa mesa : mesas) {
                             if (mesa.getPosicionInteractuar()[0][0] == posX && mesa.getPosicionInteractuar()[0][1] == posY) {
                                 mesa.jugar();
                             }
                         }
+                        // Comprobar si estamos en el cajero
                         if (posX == 2 && posY == 7){
                             new Cajero(jugador);
                         }
+                        // Comprobar si estamos en el la puerta
                         if (posX == 4 && posY == 0){
                             new PuertaSalida(jugador);
                         }
                         break;
                     default:
-                        validInput = false;  // Entrada no válida
+                        validInput = false;  
                         System.out.println("Comando no válido. Intenta de nuevo.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Entrada no válida. Por favor, ingresa un comando válido.");
-                scanner.nextLine(); // Limpiar el buffer
-                validInput = false;  // Repetir el bucle para pedir entrada nuevamente
+                scanner.nextLine(); 
+                validInput = false;  
             }
         }
     }

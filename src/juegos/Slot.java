@@ -1,19 +1,28 @@
 // Slot.java
 package juegos;
 
+// ASCII
 import ascii.ASCIIGeneral;
 import ascii.ASCIISlot;
+
+// Util
 import java.util.Random;
 import java.util.Scanner;
+
+// Excepciones
 import excep.ExcepcionJugadorSinFichas;
+
+// Jugador
 import personas.Jugador;
 
 public class Slot extends Juego {
 
+    // Atributos
     private int apuesta;
     private Jugador jugador;
     private ASCIISlot interfaz;
 
+    // Constructor
     public Slot(Jugador jugador) {
         super(jugador);
         this.jugador = jugador;
@@ -40,7 +49,8 @@ public class Slot extends Juego {
                     case 1:
                         ASCIIGeneral.limpiarPantalla();
                         interfaz.titulo();
-                        realizarApuesta(input);
+                        apuesta = definirApuesta(input);
+                        jugarSlot();
                         ASCIIGeneral.esperarTecla();
                         break;
                     case 2:
@@ -63,26 +73,6 @@ public class Slot extends Juego {
         }
     }
 
-    private void realizarApuesta(Scanner input) {
-        System.out.println("¿Cuántas fichas deseas apostar?");
-        System.out.println("Tienes " + jugador.getFichas() + " fichas disponibles.");
-
-        try {
-            apuesta = input.nextInt();
-            input.nextLine(); // Limpiar buffer
-
-            if (apuesta <= 0 || apuesta > jugador.getFichas()) {
-                System.out.println("Apuesta no válida. Intenta de nuevo.");
-                return;
-            }
-
-            jugador.restarFichas(apuesta);
-            jugarSlot();
-        } catch (Exception e) {
-            System.out.println("Entrada inválida. Intenta de nuevo.");
-            input.nextLine();
-        }
-    }
 
     private void jugarSlot() {
         Random random = new Random();

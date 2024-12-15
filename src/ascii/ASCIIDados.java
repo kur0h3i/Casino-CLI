@@ -1,6 +1,8 @@
 // ASCIIDados.java
+
 package ascii;
 
+//Jugador
 import personas.Jugador;
 
 public class ASCIIDados {
@@ -13,7 +15,7 @@ public class ASCIIDados {
         this.jugador = jugador;
     }
 
-    // Mostrar el título del juego
+    // Titulo de Dados
     public void titulo() {
         System.out.println("  ____            _      ");
         System.out.println(" |  _ \\  __ _  __| | ___ ");
@@ -22,7 +24,7 @@ public class ASCIIDados {
         System.out.println(" |____/ \\__,_|\\__,_|\\___|");
     }
 
-    // Mostrar cheatsheet con las reglas y pagos
+    // CheetSheet de los dados
     public void cheatsheet() {
         System.out.println("___________________________ CHEATSHEET ___________________________");
         System.out.println("| Fase                   | Resultado        | Efecto             |");
@@ -36,7 +38,7 @@ public class ASCIIDados {
         System.out.println("|________________________|__________________|____________________|");
     }
 
-    // Mostrar opciones para el jugador
+    // Opciones de los dados
     public void opciones() {
         jugador.datosUsuarioEnPartida();
         System.out.println("1. Tirar los dados");

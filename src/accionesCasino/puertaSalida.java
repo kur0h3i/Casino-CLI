@@ -1,12 +1,21 @@
 package accionesCasino;
 
+// IO
 import java.io.*;
+
+// Util
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+// Excepciones
 import excep.ExcepcionJugadorNoEncontrado;
 import excep.ExcepcionJugadorSinDinero;
 import excep.ExcepcionJugadorSinFichas;
+
+// Jugador
 import personas.Jugador;
+
+// ASCII
 import ascii.ASCIIPuerta;
 import ascii.ASCIIGeneral;
 
@@ -27,9 +36,6 @@ public class PuertaSalida {
     // Metodos
     public void inicarPuerta(Scanner input){
         
-        // Guardar Partida
-        // Cargar Partida
-        // Salir
         int opcion = 0;
         while (opcion != 4) {
             ASCIIGeneral.limpiarPantalla();
@@ -39,7 +45,6 @@ public class PuertaSalida {
                 opcion = input.nextInt();
                 input.nextLine(); 
                 
-                // Opciones del menú principal
                 switch (opcion) {
                     case 1:
                         guardarPartida();
@@ -68,11 +73,13 @@ public class PuertaSalida {
         }
     }
 
+    // Salir
     public void salir(){
         System.out.println("Saliendo del casino");
         System.exit(0);
     }
 
+    // Guardar Partida en la carpeta saves/
     public void guardarPartida() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("saves/" + jugador.getName() +".dat"))) {
             oos.writeObject(jugador);
@@ -82,6 +89,7 @@ public class PuertaSalida {
         }
     }
 
+    // Cargar Partida
     public void cargarPartida() {
         Scanner input = new Scanner(System.in);
         System.out.println("Nombre del jugador que quieres cargar: ");
