@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MainCasino",
+            "request": "launch",
+            "mainClass": "MainCasino",
+            "projectName": "Casino-CLI_34ac63aa"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "blackjack.Main",
