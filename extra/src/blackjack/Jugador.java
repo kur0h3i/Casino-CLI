@@ -4,7 +4,7 @@ public class Jugador {
     private Carta[] mano; // Arreglo para guardar las cartas del jugador
     private int numeroCartas; // Número de cartas en la mano
     private String nombre; // Nombre del jugador
-
+    
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.mano = new Carta[11]; // Un jugador no puede tener más de 11 cartas sin pasarse de 21
